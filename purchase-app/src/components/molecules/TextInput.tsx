@@ -36,7 +36,7 @@ const TextInput = ({ onChange }: ITextInputProps) => {
         required
       />
       <button
-        className="bg-black-btn text-white px-4 py-1 rounded-full ml-2"
+        className="bg-black-btn text-white px-4 py-2 rounded-full ml-2 cursor-pointer"
         onClick={handleSubmit}
         disabled={!inputState}
       >
