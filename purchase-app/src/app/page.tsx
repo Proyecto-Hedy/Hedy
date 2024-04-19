@@ -1,18 +1,15 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Container from "@/components/container";
 import ProductsTemplate from "@/modules/products/template/product-template";
 import { useApi } from "@/hooks/useApi";
-import { IProductData } from "@/interfaces/data.interfaces"; 
+import { IDataResponse, IProductData } from "@/interfaces/data.interfaces";
 
 const Home = () => {
-  const limit = 18; // Estableces el límite de productos a 18
-  const [skip, setSkip] = useState(0); // Inicializas el valor de skip en 0
-  const { data: products, isLoading, error, fetchData } = useApi<IProductData[]>(`?limit=${limit}&skip=${skip}`);
-
-  useEffect(() => {
-    fetchData(`?limit=${limit}&skip=${skip}`); 
-  }, [fetchData, limit, skip]);
+  const limit = 18;
+  const [skip, setSkip] = React.useState(0);
+  const { data, isLoading, error } = useApi<IDataResponse>(`?limit=${limit}&skip=${skip}`);
+  //implentar fetchData para paginación
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
@@ -25,7 +22,7 @@ const Home = () => {
         ) : error ? (
           <p>Error: {error.message}</p>
         ) : (
-          <ProductsTemplate products={products || []} />
+          <ProductsTemplate products={data!.products} />
         )}
       </Container>
     </main>

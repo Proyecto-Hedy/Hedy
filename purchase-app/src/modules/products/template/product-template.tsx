@@ -9,10 +9,9 @@ interface ProductsTemplateProps {
 const ProductsTemplate: React.FC<ProductsTemplateProps> = ({ products }) => {
   return (
     <div className="grid grid-cols-3 gap-4">
-      {Array.isArray(products) && products.map((product) => (
-  <ProductPreview key={product.id} product={product} />
-))}
-
+      {products.map((product) => (
+        <ProductPreview key={product.id} product={product} />
+      ))}
     </div>
   );
 };
