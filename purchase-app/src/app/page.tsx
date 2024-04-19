@@ -1,4 +1,14 @@
 import Container  from "@/components/container";
+import { useEffect } from "react";
+import restServices from "@/hooks/useApi";
+
+// const productPreview = () => {
+//   const {data, isLoading, error, fetchData} = restServices();
+
+//   useEffect(() => {
+//     fetchData("/product");
+//   },[]
+// }
 
 export default function Home() {
   return (
