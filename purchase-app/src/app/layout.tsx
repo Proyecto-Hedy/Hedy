@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Raleway } from "next/font/google";
 import "./globals.css";
 import Footer from "../components/organisms/Footer";
 import Navbar from "../components/organisms/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const raleway = Raleway({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Proyecto Hedy",
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Navbar />
-      <body className={inter.className}>{children}</body>
+      <body className={raleway.className}>{children}</body>
       <Footer />
     </html>
   );
