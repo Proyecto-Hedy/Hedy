@@ -8,6 +8,9 @@ on:
 jobs:
   integration:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./purchase-app
     steps:
       - uses: actions/checkout@v4
         with:
