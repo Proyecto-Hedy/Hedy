@@ -1,5 +1,4 @@
-"use client";
-import { useFormState } from "react-dom";
+import { useState } from "react";
 import { LOGIN_VIEW } from "@/modules/account/login-template";
 
 type Props = {
@@ -8,85 +7,74 @@ type Props = {
 
 const Register = ({ setCurrentView }: Props) => {
   const handleRegister = () => {
-    // Aquí puedes implementar la lógica para el registro del usuario
+    // implementar la lógica para el registro del usuario
     console.log("Registrando usuario...");
   };
 
   return (
-    <div className="max-w-sm flex flex-col items-center" data-testid="register-page">
-      <h1 className="text-large-semi uppercase mb-6">
-        Become a Medusa Store Member
-      </h1>
-      <p className="text-center text-base-regular text-ui-fg-base mb-4">
-        Create your Medusa Store Member profile, and get access to an enhanced
-        shopping experience.
-      </p>
-      <form className="w-full flex flex-col" onSubmit={handleRegister}>
-        <div className="flex flex-col w-full gap-y-2">
-          <label>
-            First name:
+    <div className="max-w-md w-full bg-white rounded-lg overflow-hidden mx-auto mt-20 relative z-10 shadow-md">
+      <div className="px-8 py-6">
+        <h1 className="text-2xl font-bold text-center">Become a Member</h1>
+        <p className="text-gray-600 text-center mb-6">Create your account and get access to an enhanced shopping experience.</p>
+        <form className="space-y-4" onSubmit={handleRegister}>
+          <div>
+            <label htmlFor="first_name" className="block text-gray-700">First Name</label>
             <input
+              id="first_name"
               type="text"
               name="first_name"
+              placeholder="Enter your first name"
+              className="w-full border rounded-md py-2 px-3 text-gray-700 focus:outline-none focus:border-blue-500"
               required
-              autoComplete="given-name"
-              data-testid="first-name-input"
             />
-          </label>
-          <label>
-            Last name:
+          </div>
+          <div>
+            <label htmlFor="last_name" className="block text-gray-700">Last Name</label>
             <input
+              id="last_name"
               type="text"
               name="last_name"
+              placeholder="Enter your last name"
+              className="w-full border rounded-md py-2 px-3 text-gray-700 focus:outline-none focus:border-blue-500"
               required
-              autoComplete="family-name"
-              data-testid="last-name-input"
             />
-          </label>
-          <label>
-            Email:
+          </div>
+          <div>
+            <label htmlFor="email" className="block text-gray-700">Email</label>
             <input
+              id="email"
               type="email"
               name="email"
+              placeholder="Enter your email"
+              className="w-full border rounded-md py-2 px-3 text-gray-700 focus:outline-none focus:border-blue-500"
               required
-              autoComplete="email"
-              data-testid="email-input"
             />
-          </label>
-          <label>
-            Phone:
+          </div>
+          <div>
+            <label htmlFor="phone" className="block text-gray-700">Phone</label>
             <input
+              id="phone"
               type="tel"
               name="phone"
-              autoComplete="tel"
-              data-testid="phone-input"
+              placeholder="Enter your phone number"
+              className="w-full border rounded-md py-2 px-3 text-gray-700 focus:outline-none focus:border-blue-500"
             />
-          </label>
-          <label>
-            Password:
+          </div>
+          <div>
+            <label htmlFor="password" className="block text-gray-700">Password</label>
             <input
+              id="password"
               type="password"
               name="password"
+              placeholder="Enter your password"
+              className="w-full border rounded-md py-2 px-3 text-gray-700 focus:outline-none focus:border-blue-500"
               required
-              autoComplete="new-password"
-              data-testid="password-input"
             />
-          </label>
-        </div>
-        <button type="submit" className="w-full mt-6" data-testid="register-button">
-          Join
-        </button>
-      </form>
-    <span className="text-center text-ui-fg-base text-small-regular mt-6">
-        Already a member?{" "}
-        <button
-            onClick={() => setCurrentView("sign-in" as LOGIN_VIEW)}
-            className="underline"
-        >
-            Sign in
-        </button>
-        .
-    </span>
+          </div>
+          <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Join</button>
+        </form>
+        <p className="text-center mt-4 text-gray-600">Already a member? <button onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)} className="underline">Sign in</button></p>
+      </div>
     </div>
   );
 };

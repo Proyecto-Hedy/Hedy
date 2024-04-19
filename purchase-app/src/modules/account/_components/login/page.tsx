@@ -21,48 +21,42 @@ const Login = ({ setCurrentView }: Props) => {
   };
 
   return (
-    <div className="max-w-sm w-full flex flex-col items-center mt-20 relative z-10"> {/* Agregamos un margen superior de 20 unidades y z-index de 10 */}
-      <h1 className="text-large-semi uppercase mb-6">Welcome back</h1>
-      <p className="text-center text-base-regular text-ui-fg-base mb-8">
-        Sign in to access an enhanced shopping experience.
-      </p>
-      <form className="w-full" onSubmit={handleSubmit}>
-        <div className="flex flex-col w-full gap-y-2">
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="input-field"
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="input-field"
-            required
-          />
-        </div>
-        {errorMessage && <span className="text-red-500">{errorMessage}</span>}
-        <div className="flex justify-center mt-6">
-          <button type="submit" className="btn btn-primary w-full">Sign in</button>
-        </div>
-      </form>
-      <span className="text-center text-ui-fg-base text-small-regular mt-6">
-        Not a member?{" "}
-        <button
-          onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
-          className="underline"
-          data-testid="register-button"
-        >
-          Join us
-        </button>
-        .
-      </span>
+    <div className="max-w-md w-full bg-white rounded-lg overflow-hidden mx-auto mt-20 relative z-10 shadow-md">
+      <div className="px-8 py-6">
+        <h1 className="text-2xl font-bold text-center">Welcome back</h1>
+        <p className="text-gray-600 text-center mb-6">Sign in to access an enhanced shopping experience.</p>
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="email" className="block text-gray-700">Email</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full border rounded-md py-2 px-3 text-gray-700 focus:outline-none focus:border-blue-500"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="password" className="block text-gray-700">Password</label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full border rounded-md py-2 px-3 text-gray-700 focus:outline-none focus:border-blue-500"
+              required
+            />
+          </div>
+          {errorMessage && <span className="text-red-500">{errorMessage}</span>}
+          <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Sign in</button>
+        </form>
+        <p className="text-center mt-4 text-gray-600">Not a member? <button onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)} className="underline">Join us</button></p>
+      </div>
     </div>
   );
 }
