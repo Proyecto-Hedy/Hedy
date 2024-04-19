@@ -1,0 +1,14 @@
+.productContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.productContainer > * {
+    flex-basis: calc(33.33% - 10px); /* Ancho de cada elemento con un espacio de 10px entre ellos */
+    margin-bottom: 20px; /* Espacio entre las filas */
+}
+
+.product-preview {
+    border-radius: 8px; 
+  }

@@ -9,7 +9,7 @@ const Home = () => {
   const limit = 18;
   const [skip, setSkip] = React.useState(0);
   const { data, isLoading, error } = useApi<IDataResponse>(`?limit=${limit}&skip=${skip}`);
-  //implentar fetchData para paginación
+  //implentar fetchData para
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
