@@ -17,7 +17,7 @@ const Navbar = () => {
         </Link>
         <TextInput onChange={handleChangeInput} />
         <div className="flex items-center space-x-4">
-          <Link href="/pages/account/login" passHref>
+          <Link href="/pages/account">
             <button className="btn btn-success">Account</button>
           </Link>
           <Link href="/pages/cart" passHref>
