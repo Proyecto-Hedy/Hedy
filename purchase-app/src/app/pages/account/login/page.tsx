@@ -1,12 +1,23 @@
+"use client"
+import { useState } from "react";
+import Login from "./Login";
 
-import { Metadata } from "next";
-import LoginTemplate from "@/modules/account/login-template";
+export enum LOGIN_VIEW {
+    SIGN_IN = "sign-in",
+    REGISTER = "register",
+}
 
-export const metadata: Metadata = {
-    title: "Login",
-    description: "Login page",
-    };
+export default function Account() {
+    const [currentView, setCurrentView] = useState(LOGIN_VIEW.SIGN_IN)
 
-export default function Login() {
-    return <LoginTemplate />;
+    return (
+        <div className="min-h-screen bg-white flex items-center justify-center">
+            {currentView === LOGIN_VIEW.SIGN_IN ? (
+            <Login setCurrentView={setCurrentView} />
+            ) : (
+                <></>
+            // <Register setCurrentView={setCurrentView} />
+            )}
+        </div>
+    )
 }
