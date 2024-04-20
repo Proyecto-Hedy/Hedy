@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Container from "@/components/container";
+import Container  from "@/components/molecules/Container";
 import ProductsTemplate from "@/modules/products/template/product-template";
 import { useApi } from "@/hooks/useApi";
 import { IDataResponse, IProductData } from "@/interfaces/data.interfaces";
