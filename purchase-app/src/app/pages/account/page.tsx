@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react";
-import Login from "./Login";
+import Login from "./login/Login";
+import Register from "./register/Register";
 
 export enum LOGIN_VIEW {
     SIGN_IN = "sign-in",
@@ -13,10 +14,9 @@ export default function Account() {
     return (
         <div className="min-h-screen bg-white flex items-center justify-center">
             {currentView === LOGIN_VIEW.SIGN_IN ? (
-            <Login setCurrentView={setCurrentView} />
+                <Login setCurrentView={setCurrentView} />
             ) : (
-                <></>
-            // <Register setCurrentView={setCurrentView} />
+                <Register setCurrentView={setCurrentView} />
             )}
         </div>
     )
