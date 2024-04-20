@@ -14,6 +14,7 @@ const config: Config = {
         "gray-txt": "rgb(156 163 175)",
         "black": "rgb(43 55 61)",
         "black-btn": "rgb(23 26 37)",
+        "black-hover": "rgb(17 24 39)",
         "blue": "rgb(59 130 246)",
         "white": "rgb(255 253 249)"
       }
