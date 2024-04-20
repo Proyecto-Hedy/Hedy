@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { LOGIN_VIEW } from "@/modules/account/login-template";
 
@@ -13,6 +13,7 @@ const Login = ({ setCurrentView }: ILoginProps) => {
   const [userEmail, setUserEmail] = useState<string>("");
   const [userPassword, setUserPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(true);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,6 +26,15 @@ const Login = ({ setCurrentView }: ILoginProps) => {
     }
   };
 
+  useEffect(() => {
+    if (userEmail && userPassword) {
+      setIsSubmitDisabled(false)
+    }
+    else {
+      setIsSubmitDisabled(true)
+    }
+  }, [userEmail, userPassword])
+
   return (
     <div id="login-pages" className="w-2/4">
       <div id="onboarding-card" className="min-w-full m-auto bg-gray-bg">
@@ -32,10 +42,10 @@ const Login = ({ setCurrentView }: ILoginProps) => {
           id="onboarding-form" 
           className="p-16 rounded-xl bg-gray-bg flex flex-col justify-center w-full text-center shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]"
         >
-            <h2 className="text-2xl font-bold	">
+            <h2 className="text-xl font-bold	">
             WELCOME BACK
             </h2>
-            <p className="text-xl">Sign in to access an enhanced shopping experience.</p>
+            <p className="text-base">Sign in to access an enhanced shopping experience.</p>
           
           <form className="mt-8" onSubmit={handleSubmit}>
             <div>
@@ -65,7 +75,7 @@ const Login = ({ setCurrentView }: ILoginProps) => {
               />
             </div>
             {errorMessage && <span className="text-red-500">{errorMessage}</span>}
-            <Button name="Sign in" />
+            <Button name="Sign in" disabled={isSubmitDisabled} />
           </form>
           <div>
             <button 
