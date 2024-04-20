@@ -1,6 +1,6 @@
 import React from "react";
 import { IProductData } from "@/interfaces/data.interfaces"; 
-import ProductPreview from "../components/product-preview";
+import ProductPreview from "../components/product-preview/product-preview";
 import styles from "./product-template.module.css";
 
 interface ProductsTemplateProps {
