@@ -3,6 +3,7 @@ import Button from "@/components/atoms/Button";
 import { useEffect, useState } from "react";
 import signUp from "@/services/auth/signUp";
 import { LOGIN_VIEW } from "@/interfaces/enums";
+import { toast } from "react-toastify";
 
 interface IRegisterProps {
   setCurrentView: (view: LOGIN_VIEW) => void;
@@ -13,7 +14,6 @@ const Register = ({ setCurrentView }: IRegisterProps) => {
   const [userLastName, setUserLastName] = useState<string>("")
   const [userEmail, setUserEmail] = useState<string>("")
   const [userPassword, setUserPassword] = useState<string>("")
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(true);
   const [isSubmitLoading, setIsSubmitLoading] = useState<boolean>(false);
 
@@ -21,12 +21,13 @@ const Register = ({ setCurrentView }: IRegisterProps) => {
     e.preventDefault()
     setIsSubmitLoading(true)
 
-    const { status, errorMessage } = await signUp(userEmail, userPassword)
+    const { status, message } = await signUp(userEmail, userPassword)
 
-    if (status === 400 && errorMessage) {
-      setErrorMessage(errorMessage);
+    if (status === 400 && message) {
+      toast.error(message, { toastId: "fail" })
     }
     else {
+      toast.success(message, { toastId: "register" })
       setCurrentView(LOGIN_VIEW.SIGN_IN)
     }
 
@@ -43,11 +44,11 @@ const Register = ({ setCurrentView }: IRegisterProps) => {
   }, [userEmail, userPassword, userFirstName, userLastName])
 
   return (
-    <div id="register-pages" className="w-2/4">
+    <div id="register-pages" className="w-2/4 mb-16 mt-16">
       <div id="onboarding-card" className="min-w-full m-auto bg-gray-bg mt-16 mb-16">
         <div 
           id="onboarding-form" 
-          className="p-16 rounded-xl bg-gray-bg flex flex-col justify-center w-full text-center shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]"
+          className="p-8 rounded-xl bg-gray-bg flex flex-col justify-center w-full text-center shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]"
         >
           <h2 className="text-2xl font-bold	">
             BECOME A MEMBER
@@ -63,7 +64,7 @@ const Register = ({ setCurrentView }: IRegisterProps) => {
                 title="Enter your first name"
                 value={userFirstName}
                 onChange={(e) => setUserFirstName(e.target.value)}
-                className="border m-2 text-xl bg-white p-4 w-full rounded-lg font-extralight"
+                className="border m-2 text-xl bg-white p-2 w-full rounded-lg font-extralight"
                 required
               />
             </div>
@@ -76,7 +77,7 @@ const Register = ({ setCurrentView }: IRegisterProps) => {
                 title="Enter your last name"
                 value={userLastName}
                 onChange={(e) => setUserLastName(e.target.value)}
-                className="border m-2 text-xl bg-white p-4 w-full rounded-lg font-extralight"
+                className="border m-2 text-xl bg-white p-2 w-full rounded-lg font-extralight"
                 required
               />
             </div>
@@ -89,7 +90,7 @@ const Register = ({ setCurrentView }: IRegisterProps) => {
                 title="Enter your email"
                 value={userEmail}
                 onChange={(e) => setUserEmail(e.target.value)}
-                className="border m-2 text-xl bg-white p-4 w-full rounded-lg font-extralight"
+                className="border m-2 text-xl bg-white p-2 w-full rounded-lg font-extralight"
                 required
               />
             </div>
@@ -102,11 +103,10 @@ const Register = ({ setCurrentView }: IRegisterProps) => {
                 title="Enter your password"
                 value={userPassword}
                 onChange={(e) => setUserPassword(e.target.value)}
-                className="border m-2 text-xl bg-white p-4 w-full rounded-lg font-extralight"
+                className="border m-2 text-xl bg-white p-2 w-full rounded-lg font-extralight"
                 required
               />
             </div>
-            {errorMessage && <span className="text-red-500">{errorMessage}</span>}
             <Button name="Sign up" isDisabled={isSubmitDisabled} isLoading={isSubmitLoading} />
             <Button 
               name="I have account" 

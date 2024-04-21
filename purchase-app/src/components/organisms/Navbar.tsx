@@ -8,6 +8,7 @@ import Image from 'next/image';
 import TextInput from '../molecules/TextInput';
 import { useDataContext } from '@/context/data.context';
 import logOut from '@/services/auth/signOut';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
   const { user } = useDataContext()
@@ -15,6 +16,11 @@ const Navbar = () => {
 
   const handleChangeInput = (value: string) => {
     console.log("🚀 ~ handleChangeInput ~ value:", value)
+  }
+
+  const handleLogOut = async () => {
+    const { message } = await logOut()
+    toast.success(message, { toastId: "log out" })
   }
 
   return (
@@ -49,7 +55,7 @@ const Navbar = () => {
                 : (
                   <button 
                     className='p-2 hover:bg-gray-bg-light hover:text-white rounded-lg'
-                    onClick={logOut}
+                    onClick={handleLogOut}
                   >
                     Sign out
                   </button>
