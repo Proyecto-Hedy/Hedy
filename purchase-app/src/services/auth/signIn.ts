@@ -7,17 +7,17 @@ import ErrorHandler from "@/helper/errorHandler.helper";
 const auth = getAuth(firebase_app);
 
 const signIn = async (email: string, password: string): Promise<AuthResponse> => {
-    try {
-      const response = await signInWithEmailAndPassword(auth, email, password);
-      return { response, status: RESPONSE_STATUS.CREATED, message: "Sign in successfully" }
-    } catch (error: any) {
-      const errorMessage  = error.message
-      const errorCode = error.code;
+  try {
+    const { user } = await signInWithEmailAndPassword(auth, email, password);
+    return { response: user, status: RESPONSE_STATUS.CREATED, message: "Sign in successfully" }
+  } catch (error: any) {
+    const errorMessage  = error.message
+    const errorCode = error.code;
 
-      const message = ErrorHandler(errorCode, errorMessage)
+    const message = ErrorHandler(errorCode, errorMessage)
 
-      return { message , status: RESPONSE_STATUS.BAD_REQUEST }
-    }
+    return { message , status: RESPONSE_STATUS.BAD_REQUEST }
+  }
 }
 
 export default signIn

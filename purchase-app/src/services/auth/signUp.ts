@@ -8,8 +8,8 @@ const auth = getAuth(firebase_app);
 
 const signUp = async (email: string, password: string): Promise<AuthResponse> => {
   try {
-    const response = await createUserWithEmailAndPassword(auth, email, password)
-    return { response, status: RESPONSE_STATUS.CREATED, message: "Member profile created successfully" }
+    await createUserWithEmailAndPassword(auth, email, password)
+    return { status: RESPONSE_STATUS.CREATED, message: "Member profile created successfully" }
   } catch (error: any) {
     const errorMessage  = error.message
     const errorCode = error.code;
