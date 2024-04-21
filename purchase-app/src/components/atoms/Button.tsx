@@ -1,22 +1,25 @@
+import LoadingSpinner from "./LoadingSpinner";
+
 interface IButtonProps {
   name: string;
   onClick?: () => void;
   className?: string;
-  disabled?: boolean;
+  isDisabled?: boolean;
+  isLoading?: boolean;
 }
 
-const Button = ({ name, onClick, className, disabled=false }: IButtonProps) => {
+const Button = ({ name, onClick, className, isDisabled=false, isLoading }: IButtonProps) => {
   return (
     <button
       type="submit"
-      disabled={disabled}
-      className={`w-full mb-8 mt-8 p-4 rounded-xl shadow-[0_3px_10px_rgb(0,0,0,0.2)]
-      ${disabled ? "bg-gray-bg-light text-white hover:bg-gray-bg-light cursor-not-allowed" : ""}
+      disabled={isDisabled}
+      className={`w-full h-[100px] mb-8 mt-8 p-4 rounded-xl shadow-[0_3px_10px_rgb(0,0,0,0.2)]
+      ${isDisabled ? "bg-gray-bg-light text-white hover:bg-gray-bg-light cursor-not-allowed" : ""}
       ${className ? className : "bg-black-btn hover:bg-black-hover hover:text-white text-xl font-medium text-gray-bg-light"}
       `}
       onClick={onClick}
     >
-      {name}
+      {isLoading ? <LoadingSpinner type="button"/> : name}
     </button>
   );
 }
