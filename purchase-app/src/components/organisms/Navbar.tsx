@@ -7,6 +7,7 @@ import Image from 'next/image';
 
 import TextInput from '../molecules/TextInput';
 import { useDataContext } from '@/context/data.context';
+import logOut from '@/services/auth/signOut';
 
 const Navbar = () => {
   const { user } = useDataContext()
@@ -40,12 +41,20 @@ const Navbar = () => {
             </Link>
             {isHover && (
               <div className='z-50 absolute left-[15%] flex flex-col justify-center bg-gray-bg text-sm'>
-                {!user && <Link className='p-2 hover:bg-gray-bg-light hover:text-white rounded-lg' href="/pages/account/login" passHref>
-                  Log in
-                </Link>}
-                <Link className='p-2 hover:bg-gray-bg-light hover:text-white rounded-lg' href="/pages/account/login" passHref>
-                  Log out
-                </Link>
+                {!user ? (
+                  <Link className='p-2 hover:bg-gray-bg-light hover:text-white rounded-lg' href="/pages/account">
+                    Sign in
+                  </Link>
+                )
+                : (
+                  <button 
+                    className='p-2 hover:bg-gray-bg-light hover:text-white rounded-lg'
+                    onClick={logOut}
+                  >
+                    Sign out
+                  </button>
+                )
+                }
               </div>)
             }
           </div>
