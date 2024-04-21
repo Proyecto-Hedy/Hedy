@@ -7,6 +7,7 @@ import Footer from "../components/organisms/Footer";
 import Navbar from "../components/organisms/Navbar";
 
 import { DataProvider } from "@/context/data.context";
+import ToastProvider from "@/context/toast.context";
 
 const raleway = Raleway({ subsets: ["latin"] });
 
@@ -24,9 +25,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={raleway.className}>
         <DataProvider>
-          <Navbar />
-          {children}
-          <Footer />
+          <ToastProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </ToastProvider>
         </DataProvider>
       </body>
     </html>
