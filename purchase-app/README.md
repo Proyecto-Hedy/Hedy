@@ -12,6 +12,8 @@ Aca la lista completa de las var:
 * blue para resaltar precios, lineas, etc.
 * white sera el bg principal.
 
+<br>
+
 ## Base de datos
 
 Como BD vamos a utilizar "dummyJSON". Esta api nos provee fake data de productos en diferente categorias.
@@ -38,3 +40,30 @@ details: const { data } = useApi<any>("/${slugId}")
 - Donde las var limit y skip vendran de la paginacion.
 - Donde el inputSearch vendra de lo ingresado en el input search.
 - Donde el slugId vendra del id del product.
+
+<br>
+
+## Autentificacion y autorizacion
+
+Para la auth estamos usando `firebase Authentication` para permitir que los usuarios se autentiquen usando sus direcciones de correo electrónico y contraseñas, y para administrar las cuentas basadas en contraseñas.
+
+### Authentication vs Authorization
+    Authentication : 
+        telling the system who you are 
+	    by providing username and password.
+
+
+	  Authorization : 
+				things you can do according to who you are.
+
+<br>
+
+__Es necesario agregar al archivo .env las siguiente variable:__
+```
+NEXT_PUBLIC_FIREBASE_API_KEY=api-key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=auth-domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=project-id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=storage-bucket
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=sender-id
+NEXT_PUBLIC_FIREBASE_APP_ID=app-id
+```
