@@ -2,11 +2,7 @@
 import { useState } from "react";
 import Login from "./login/Login";
 import Register from "./register/Register";
-
-export enum LOGIN_VIEW {
-    SIGN_IN = "sign-in",
-    REGISTER = "register",
-}
+import { LOGIN_VIEW } from "@/interfaces/enums";
 
 export default function Account() {
     const [currentView, setCurrentView] = useState(LOGIN_VIEW.SIGN_IN)
