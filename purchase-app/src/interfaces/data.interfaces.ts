@@ -24,5 +24,5 @@ export interface IProductData {
 export interface AuthResponse {
   response?: UserCredential;
   status: number;
-  errorMessage?: string;
+  message?: string;
 }
