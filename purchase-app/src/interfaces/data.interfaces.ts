@@ -1,4 +1,4 @@
-import { UserCredential } from "firebase/auth";
+import { User } from "firebase/auth";
 
 export interface IDataResponse {
   products: IProductData[]
@@ -22,7 +22,7 @@ export interface IProductData {
 }
 
 export interface AuthResponse {
-  response?: UserCredential;
+  response?: User;
   status: number;
   message?: string;
 }
