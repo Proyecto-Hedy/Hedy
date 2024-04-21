@@ -15,20 +15,22 @@ const Register = ({ setCurrentView }: IRegisterProps) => {
   const [userPassword, setUserPassword] = useState<string>("")
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(true);
+  const [isSubmitLoading, setIsSubmitLoading] = useState<boolean>(false);
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
-    const { response, status, errorMessage } = await signUp(userEmail, userPassword)
+    setIsSubmitLoading(true)
+
+    const { status, errorMessage } = await signUp(userEmail, userPassword)
 
     if (status === 400 && errorMessage) {
       setErrorMessage(errorMessage);
     }
     else {
-      // deberia guardar la response en un context
+      setCurrentView(LOGIN_VIEW.SIGN_IN)
     }
 
-    // setCurrentView(LOGIN_VIEW.SIGN_IN)
+    setIsSubmitLoading(false)
   };
 
   useEffect(() => {
@@ -105,7 +107,7 @@ const Register = ({ setCurrentView }: IRegisterProps) => {
               />
             </div>
             {errorMessage && <span className="text-red-500">{errorMessage}</span>}
-            <Button name="Sign up" disabled={isSubmitDisabled} />
+            <Button name="Sign up" isDisabled={isSubmitDisabled} isLoading={isSubmitLoading} />
             <Button 
               name="I have account" 
               onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)} 

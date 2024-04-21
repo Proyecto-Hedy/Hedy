@@ -1,33 +1,38 @@
 "use client"
 import { useEffect, useState } from "react";
 
-
 import Button from "@/components/atoms/Button";
 import signIn from "@/services/auth/signIn";
 import { LOGIN_VIEW } from "@/interfaces/enums";
+import { useDataContext } from "@/context/data.context";
+import { navigate } from "@/services/actions";
 
 interface ILoginProps {
   setCurrentView: (view: LOGIN_VIEW) => void;
 }
 
 const Login = ({ setCurrentView }: ILoginProps) => {
+  const { setUser } = useDataContext()
   const [userEmail, setUserEmail] = useState<string>("");
   const [userPassword, setUserPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(true);
+  const [isSubmitLoading, setIsSubmitLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+    setIsSubmitLoading(true)
+
     const { response, status, errorMessage } = await signIn(userEmail, userPassword)
 
     if (status === 400 && errorMessage) {
       setErrorMessage(errorMessage);
     }
     else {
-      // deberia guardar la response en un context
-      // redirect to home
+      setUser(response!.user.email)
+      navigate("/")
     }
+    setIsSubmitLoading(false)
   };
 
   useEffect(() => {
@@ -35,6 +40,7 @@ const Login = ({ setCurrentView }: ILoginProps) => {
       setIsSubmitDisabled(false)
     }
     else {
+      setErrorMessage(null)
       setIsSubmitDisabled(true)
     }
   }, [userEmail, userPassword])
@@ -79,7 +85,7 @@ const Login = ({ setCurrentView }: ILoginProps) => {
               />
             </div>
             {errorMessage && <span className="text-red-500">{errorMessage}</span>}
-            <Button name="Sign in" disabled={isSubmitDisabled} />
+            <Button name="Sign in" isDisabled={isSubmitDisabled} isLoading={isSubmitLoading} />
           </form>
           <div>
             <button 
