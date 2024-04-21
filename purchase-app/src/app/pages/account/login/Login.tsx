@@ -1,10 +1,10 @@
 "use client"
 import { useEffect, useState } from "react";
 
-import { LOGIN_VIEW } from "@/modules/account/login-template";
 
 import Button from "@/components/atoms/Button";
 import signIn from "@/services/auth/signIn";
+import { LOGIN_VIEW } from "@/interfaces/enums";
 
 interface ILoginProps {
   setCurrentView: (view: LOGIN_VIEW) => void;
