@@ -1,8 +1,11 @@
 "use client"
 import Link from 'next/link';
 import TextInput from '../molecules/TextInput';
+import { useDataContext } from '@/context/data.context';
 
 const Navbar = () => {
+  const { user } = useDataContext()
+
   const handleChangeInput = (value: string) => {
     console.log("🚀 ~ handleChangeInput ~ value:", value)
   }
@@ -18,7 +21,7 @@ const Navbar = () => {
         <TextInput onChange={handleChangeInput} />
         <div className="flex items-center space-x-4">
           <Link href="/pages/account">
-            <button className="btn btn-success">Account</button>
+            <button className="btn btn-success">{user ? user.substring(0, user.lastIndexOf("@")) : "Account"}</button>
           </Link>
           <Link href="/pages/cart" passHref>
             <button className="btn btn-success">Cart</button>
