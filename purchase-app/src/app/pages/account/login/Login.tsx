@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { LOGIN_VIEW } from "@/modules/account/login-template";
 
 import Button from "@/components/atoms/Button";
+import signIn from "@/services/auth/signIn";
 
 interface ILoginProps {
   setCurrentView: (view: LOGIN_VIEW) => void;
@@ -17,12 +18,15 @@ const Login = ({ setCurrentView }: ILoginProps) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("coso")
-    //  implementar lógica para iniciar sesión
-    try {
-      // Lógica para iniciar sesión utilizando los valores de email y password
-    } catch (error) {
-      setErrorMessage("Error al iniciar sesión. Verifica tus credenciales e inténtalo de nuevo.");
+    
+    const { response, status, errorMessage } = await signIn(userEmail, userPassword)
+
+    if (status === 400 && errorMessage) {
+      setErrorMessage(errorMessage);
+    }
+    else {
+      // deberia guardar la response en un context
+      // redirect to home
     }
   };
 
