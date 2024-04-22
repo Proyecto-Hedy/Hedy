@@ -14,11 +14,10 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({ product }) => {
         <Image
           src={product.thumbnail}
           alt={product.title}
-          width={300}
-          height={300}
+          fill
         />
       </div>
-      <div className="px-4 py-2">
+      <div className="px-4 py-2 z-50 flex items-center justify-between bg-white">
         <div className="font-bold text-lg mb-1">{product.title}</div>
         <p className="text-gray-700">${product.price}</p>
       </div>
