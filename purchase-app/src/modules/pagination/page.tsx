@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./pagination.module.css";
 
 interface PaginationProps {
   limit: number;
@@ -15,19 +16,22 @@ const Pagination: React.FC<PaginationProps> = ({
   onPreviousClick,
   onNextClick,
 }) => {
+  const canGoPrevious = skip > 0;
+  const canGoNext = skip + limit < total;
+
   return (
-    <div className="flex justify-center space-x-4">
+    <div className={styles.pagination}>
       <button
-        className="btn btn-primary"
+        className={`${styles.button} ${styles.previous}`}
         onClick={onPreviousClick}
-        disabled={skip === 0}
+        disabled={!canGoPrevious}
       >
         Previous
       </button>
       <button
-        className="btn btn-primary"
+        className={`${styles.button} ${styles.next}`}
         onClick={onNextClick}
-        disabled={skip + limit >= total}
+        disabled={!canGoNext}
       >
         Next
       </button>
