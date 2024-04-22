@@ -23,22 +23,23 @@ const Home = () => {
           <p>Error: {error.message}</p>
         ) : (
           <ProductsTemplate products={data!.products} />
-        )} {/* Added closing parenthesis here */}
-        {/* Mapea los productos y crea un enlace dinámico para cada uno */}
-        {data && data.products && data.products.map(product => (
-  <div key={product.id}>
-    <h2>{product.title}</h2>
-    <p>{product.description}</p>
-    {/* Enlace dinámico que lleva al usuario a la página de detalles del producto */}
-    <Link href={`/products/${product.id}`}>
-  <div>
-    <h2>{product.title}</h2>
-    <p>{product.description}</p>
-    {/* Otro contenido relacionado con el producto */}
-  </div>
-</Link>
-  </div>
-))}
+        )} 
+        <div className="flex justify-center space-x-4">
+          <button
+            className="btn btn-primary"
+            onClick={() => setSkip((prev) => prev - limit)}
+            disabled={skip === 0}
+          >
+            Previous
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => setSkip((prev) => prev + limit)}
+            disabled={data?.products.length !== limit}
+          >
+            Next
+          </button>
+        </div>
 
       </Container>
     </main>
