@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image"; // Importar el componente Image de Next.js
+import Image from "next/image"; 
 import ImageGallery from "@/modules/products/components/image-gallery/page";
 import ProductTabs from "@/modules/products/components/product-tabs/page";
 import RelatedProducts from "@/modules/products/components/related-product/page";
@@ -15,18 +15,20 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
 
   return (
     <div className="product-detail">
-      <div className="product-info">
-        <h2>{product.title}</h2>
-        <p>{product.description}</p>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className="product-info" style={{ flex: 1 }}>
+          <h2>{product.title}</h2>
+          <p>{product.description}</p>
+        </div>
+        <div className="thumbnail-wrapper" style={{ flex: 1 }}>
+          <Image src={thumbnail} alt="Thumbnail" width={300} height={400} />
+        </div>
+        <div className="product-price" style={{ flex: 1 }}>
+          <p>Price: ${product.price}</p>
+          <ProductTabs product={product} />
+        </div>
       </div>
-      <div className="thumbnail-wrapper">
-        <Image src={thumbnail} alt="Thumbnail" width={300} height={400} />
-      </div>
-      <div className="product-price">
-        <p>Price: ${product.price}</p>
-        <ProductTabs product={product} />
-      </div>
-      <div className="image-gallery">
+      <div className="image-gallery" style={{ width: '100%', marginTop: '20px' }}>
         <ImageGallery images={otherImages} />
       </div>
       <div className="related-products">

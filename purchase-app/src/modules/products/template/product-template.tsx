@@ -23,30 +23,3 @@ const ProductsTemplate: React.FC<ProductsTemplateProps> = ({ products }) => {
 };
 
 export default ProductsTemplate;
-
-
-//
-// import React from "react";
-// import { IProductData } from "@/interfaces/data.interfaces"; 
-// import ProductPreview from "../components/product-preview/product-preview";
-// import styles from "./product-template.module.css";
-// import Link from 'next/link';
-
-// interface ProductsTemplateProps {
-//     products: IProductData[]; 
-// }
-
-// const ProductsTemplate: React.FC<ProductsTemplateProps> = ({ products }) => {
-//     return (
-//         <Link href={`/pages/product/${products.id}`}>
-//         <div className={styles.productContainer}>
-//             {products.map((product) => (
-//                 <ProductPreview key={product.id} product={product} />
-//             ))}
-//         </div>
-//         </Link>
-//     );
-// };
-
-// export default ProductsTemplate;
-
