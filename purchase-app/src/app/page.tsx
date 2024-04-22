@@ -5,6 +5,7 @@ import ProductsTemplate from "@/modules/products/template/product-template";
 import Pagination from "@/modules/pagination/page";
 import { useApi } from "@/hooks/useApi";
 import { IDataResponse } from "@/interfaces/data.interfaces";
+import LoadingSpinner from "@/components/atoms/LoadingSpinner";
 
 const Home = () => {
   const limit = 18;
@@ -22,15 +23,10 @@ const Home = () => {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
+    <main className="m-20 flex min-h-screen flex-col items-center justify-between">
       <Container>
-        <div className="flex flex-col lg:flex-row items-center justify-center lg:pl-4">
-          <h1 className="text-4xl font-bold text-center">
-            Welcome to Purchase App
-          </h1>
-        </div>
         {isLoading ? (
-          <p>Loading...</p>
+          <LoadingSpinner />
         ) : error ? (
           <p>Error: {error.message}</p>
         ) : (

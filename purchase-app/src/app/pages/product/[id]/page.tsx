@@ -3,6 +3,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import ProductDetail from "@/modules/products/template/product-info/page";
 import useApi from "@/hooks/useApi";
+import LoadingSpinner from "@/components/atoms/LoadingSpinner";
 
 type Props = {
   params: { id: number };
@@ -17,7 +18,7 @@ const ProductPage: React.FC<Props> = ({ params }) => {
   }
 
   if (isLoading) {
-    return <p>Cargando...</p>;
+    return <LoadingSpinner />
   }
 
   if (!data) {
