@@ -14,7 +14,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   const otherImages = images.filter((image) => image !== thumbnail); // Filtrar las demás imágenes
 
   return (
-    <div className="product-detail">
+    <div className="product-detail" style={{ marginTop: '50px' }}>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px' }}>
         <div className="product-info" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', maxWidth: '600px' }}>
           <h2 style={{ fontSize: '2em' }}>{product.title}</h2>
