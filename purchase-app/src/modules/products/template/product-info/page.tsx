@@ -28,7 +28,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
           <ProductTabs product={product} />
           <hr style={{ width: '50%', margin: '20px 0' }} />
           <h3 style={{ fontSize: '1.5em', fontWeight: 'bold' }}>Price: ${product.price}</h3>
-          <button style={{ backgroundColor: '#333', color: 'white', border: 'none', padding: '10px 40px', borderRadius: '5px', cursor: 'pointer', textAlign: 'center' }}>Add to cart</button>
+          <button style={{ fontSize: '0.875rem', backgroundColor: 'black', color: 'white', border: 'none', padding: '10px 40px', borderRadius: '5px', cursor: 'pointer', textAlign: 'center', width: '50%',  boxShadow: '0 0 10px rgba(0,0,0,0.1)'}}
+            onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1a1a1a'}
+            onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'black'}>Add to cart</button>
         </div>
       </div>
       <div className="image-gallery">
