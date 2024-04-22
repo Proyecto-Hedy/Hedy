@@ -27,6 +27,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
         <div className="product-price" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
           <ProductTabs product={product} />
           <h3 style={{ fontSize: '1.5em', fontWeight: 'bold' }}>Price: ${product.price}</h3>
+          <button>Add to cart</button>
         </div>
       </div>
       <div className="image-gallery">
