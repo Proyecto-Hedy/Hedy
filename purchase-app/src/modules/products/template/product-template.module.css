@@ -45,40 +45,9 @@
     align-self: flex-end;
   }
 
-  .image-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Define el tamaño mínimo y máximo de cada columna */
-    gap: 10px; /* Espacio entre las imágenes */
-  }
-  
-  .image-gallery img {
-    max-width: 100%; /* Establece un ancho máximo para las imágenes */
-    height: auto; /* Mantiene la relación de aspecto */
-  }
 
-  .product-detail {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Three equal columns */
-    gap: 30px; /* Spacing between columns */
-  }
   
-  .product-info {
-    padding: 20px;
-  }
-  
-  .product-image {
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Center the image vertically */
-  }
-  
-  .image-gallery {
-    grid-column: span 3; /* Spans all three columns */
-    margin-top: 30px; /* Spacing above the gallery */
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Define the size of gallery images */
-    gap: 10px;
-  }
+ 
   
   
   
