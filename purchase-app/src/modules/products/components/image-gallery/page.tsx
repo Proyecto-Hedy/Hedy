@@ -7,16 +7,10 @@ interface ImageGalleryProps {
 
 const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
   return (
-    <div className="image-gallery flex flex-wrap gap-4">
+    <div className="image-gallery" style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', marginTop: '40px', marginBottom: '40px', padding: '20px', border: '1px solid #ddd', borderRadius: '15px' }}>
       {images.map((image, index) => (
-        <div key={index} className="image-wrapper overflow-hidden rounded-lg bg-gray-200">
-          <Image
-            src={image}
-            alt={`Product image ${index + 1}`}
-            width={200} 
-            height={200} 
-            objectFit="cover"
-          />
+        <div key={index} style={{ margin: '5px' }}>
+          <Image src={image} alt={`Gallery image ${index}`} width={300} height={300} objectFit="cover" />
         </div>
       ))}
     </div>
