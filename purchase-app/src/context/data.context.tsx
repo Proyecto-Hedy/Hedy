@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, createContext, useContext, useEffect, useStat
 
 import { User, getAuth, onAuthStateChanged } from "firebase/auth";
 import firebase_app from "@/services/firebase";
-import LoadingSpinner from "@/components/atoms/LoadingSpinner";
+
 /**
  * Para utilizar Context, hay 3 elementos importantes que debemos tener en cuenta:
  * - Context: es un objeto que contendra la data que queremos compartir atravez de la app.
@@ -11,8 +11,8 @@ import LoadingSpinner from "@/components/atoms/LoadingSpinner";
  * - Consumer: si vamos a manejar un solo context, como es el caso, lo ideal es crear un consumer para que sea mas facil importar.
  */
 interface IDataContext {
-  user: string | null;
-  setUser: Dispatch<SetStateAction<string | null>>;
+  user: User | null;
+  setUser: Dispatch<SetStateAction<User | null>>;
 }
 
 interface IDataProvideProps {
@@ -29,7 +29,7 @@ const DataContext = createContext<IDataContext>({
 
 // Creamos el Provider que envolvera nuestra app y/o componentes
 export const DataProvider = ({ children }: IDataProvideProps) => {
-  const [user, setUser] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
@@ -37,7 +37,7 @@ export const DataProvider = ({ children }: IDataProvideProps) => {
         const unsubscribe = onAuthStateChanged(auth, () => {
           const user = auth.currentUser;
           if (user) {
-              setUser(user.email);
+              setUser(user);
           } else {
               setUser(null);
           }
@@ -49,7 +49,7 @@ export const DataProvider = ({ children }: IDataProvideProps) => {
 
   return (
     <DataContext.Provider value={{ user, setUser }}>
-      {loading ? <LoadingSpinner /> : children}
+      {children}
     </DataContext.Provider>
   );
 }
