@@ -26,8 +26,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
         </div>
         <div className="product-price" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
           <ProductTabs product={product} />
+          <hr style={{ width: '50%', margin: '20px 0' }} />
           <h3 style={{ fontSize: '1.5em', fontWeight: 'bold' }}>Price: ${product.price}</h3>
-          <button>Add to cart</button>
+          <button style={{ backgroundColor: '#333', color: 'white', border: 'none', padding: '10px 40px', borderRadius: '5px', cursor: 'pointer', textAlign: 'center' }}>Add to cart</button>
         </div>
       </div>
       <div className="image-gallery">
