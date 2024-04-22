@@ -1,7 +1,7 @@
 import React from "react";
 import { IProductData } from "@/interfaces/data.interfaces";
 import Image from "next/image";
-import styles from "../template/product-template.module.css";
+import styles from "../../template/product-template.module.css";
 
 interface ProductPreviewProps {
   product: IProductData;
