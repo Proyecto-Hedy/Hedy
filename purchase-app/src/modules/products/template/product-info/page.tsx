@@ -24,8 +24,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
           <Image src={thumbnail} alt="Thumbnail" width={400} height={500} />
         </div>
         <div className="product-price" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-          <p>Price: ${product.price}</p>
           <ProductTabs product={product} />
+          <p>Price: ${product.price}</p>
         </div>
       </div>
       <div className="image-gallery" style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', marginTop: '40px', marginBottom: '40px', padding: '20px', border: '1px solid #ddd', borderRadius: '15px' }}>
