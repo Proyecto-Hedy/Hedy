@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import signUp from "@/services/auth/signUp";
 import { LOGIN_VIEW } from "@/interfaces/enums";
 import { toast } from "react-toastify";
+import { navigate } from "@/services/actions";
 
 interface IRegisterProps {
   setCurrentView: (view: LOGIN_VIEW) => void;
@@ -28,7 +29,7 @@ const Register = ({ setCurrentView }: IRegisterProps) => {
     }
     else {
       toast.success(message, { toastId: "register" })
-      setCurrentView(LOGIN_VIEW.SIGN_IN)
+      navigate("/")
     }
 
     setIsSubmitLoading(false)
@@ -111,7 +112,7 @@ const Register = ({ setCurrentView }: IRegisterProps) => {
             <Button 
               name="I have account" 
               onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)} 
-              className="bg-gray-bg border-black-btn border border-4 font-medium mb-2 mt-0 hover:font-bold"
+              className="bg-gray-bg border-black-btn border border-4 font-medium mb-2 hover:font-bold"
             />
           </form>
         </div>
