@@ -36,9 +36,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
       <div className="image-gallery">
         <ImageGallery images={otherImages} />
       </div>
-      <div className="related-products">
+      {/* <div className="related-products">
         <RelatedProducts product={product} />
-      </div>
+      </div> */}
     </div>
   );
 };
