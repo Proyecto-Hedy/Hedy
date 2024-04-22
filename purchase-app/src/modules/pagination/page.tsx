@@ -21,20 +21,22 @@ const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <div className={styles.pagination}>
-      <button
-        className={`${styles.button} ${styles.previous}`}
-        onClick={onPreviousClick}
-        disabled={!canGoPrevious}
-      >
-        Previous
-      </button>
-      <button
-        className={`${styles.button} ${styles.next}`}
-        onClick={onNextClick}
-        disabled={!canGoNext}
-      >
-        Next
-      </button>
+      {canGoPrevious && (
+        <button
+          className={`${styles.button} ${styles.previous}`}
+          onClick={onPreviousClick}
+        >
+          Previous
+        </button>
+      )}
+      {canGoNext && (
+        <button
+          className={`${styles.button} ${styles.next}`}
+          onClick={onNextClick}
+        >
+          Next
+        </button>
+      )}
     </div>
   );
 };
