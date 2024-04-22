@@ -7,10 +7,10 @@ interface ImageGalleryProps {
 
 const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
   return (
-    <div className="image-gallery" style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', marginTop: '40px', marginBottom: '40px', padding: '20px', border: '1px solid #ddd', borderRadius: '15px' }}>
+    <div className="image-gallery" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '30px', marginTop: '40px', marginBottom: '40px', height: '250px', overflow: 'hidden' }}>
       {images.map((image, index) => (
-        <div key={index} style={{ margin: '5px' }}>
-          <Image src={image} alt={`Gallery image ${index}`} width={250} height={250} objectFit="cover" />
+        <div key={index}>
+          <Image style={{ border: '1px solid #ddd', borderRadius: '15px' }} src={image} alt={`Gallery image ${index}`} width={250} height={250} objectFit="cover" />
         </div>
       ))}
     </div>

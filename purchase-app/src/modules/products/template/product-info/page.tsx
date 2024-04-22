@@ -4,6 +4,7 @@ import ImageGallery from "@/modules/products/components/image-gallery/page";
 import ProductTabs from "@/modules/products/components/product-tabs/page";
 import RelatedProducts from "@/modules/products/components/related-product/page";
 import { IProductData } from "@/interfaces/data.interfaces";
+import Button from "@/components/atoms/Button";
 
 interface ProductDetailProps {
   product: IProductData;
@@ -14,25 +15,29 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   const otherImages = images.filter((image) => image !== thumbnail); // Filtrar las demás imágenes
 
   return (
-    <div className="product-detail" style={{ marginTop: '50px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px', alignItems: 'center' }}>
-        <div className="product-info" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', maxWidth: '400px', height: 'auto', textAlign: 'center', marginLeft: '90px' }}>
-          <h2 style={{ fontSize: '2em' }}>{product.title}</h2>
+    <div className="product-detail" style={{ marginTop: '50px', marginBottom: '5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px', alignItems: 'center', margin: '5rem' }}>
+        <div className="product-info" 
+          style={{ maxWidth: '80%', height: '100%', marginLeft: '90px' }}>
+          <h2 style={{ fontSize: '2em', textTransform: 'capitalize' }}>{product.title}</h2>
           <br />
           <p>{product.description}</p>
         </div>
-        <div className="thumbnail-wrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', borderRadius: '15px', boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}>
-          <Image src={thumbnail} alt="Thumbnail" width={400} height={500} />
+        <div className="thumbnail-wrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '500px', overflow: 'hidden' }}>
+          <Image src={thumbnail} alt="Thumbnail" width={500} height={500} />
         </div>
-        <div className="product-price" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        <div className="product-price" style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', }}>
           <ProductTabs product={product} />
-          <hr style={{ width: '50%', margin: '20px 0' }} />
-          <h3 style={{ fontSize: '1.5em', fontWeight: 'bold' }}>Price: ${product.price}</h3>
-          <button style={{ fontSize: '0.875rem', backgroundColor: 'black', color: 'white', border: 'none', padding: '10px 40px', borderRadius: '5px', cursor: 'pointer', textAlign: 'center', width: '50%',  boxShadow: '0 0 10px rgba(0,0,0,0.1)'}}
-            onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1a1a1a'}
-            onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'black'}>Add to cart</button>
+          <div>
+            <h3 style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '1.5em', fontWeight: 'bold' }}>Price: <span style={{ color: '#777', fontWeight: 'normal' }}>${product.price}</span></h3>
+            <Button
+              className="mb-0 mt-8 bg-black-btn hover:bg-black-hover hover:text-white text-xl font-medium text-gray-bg-light"
+              name="Add to cart"
+            />
+          </div>
         </div>
       </div>
+      <div style={{ height: '1px', border: '2px solid rgb(23 26 37)', margin: '5rem' }}></div>
       <div className="image-gallery">
         <ImageGallery images={otherImages} />
       </div>
