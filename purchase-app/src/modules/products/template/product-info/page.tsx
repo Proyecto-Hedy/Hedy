@@ -15,21 +15,25 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
 
   return (
     <div className="product-detail">
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px' }}>
         <div className="product-info" style={{ flex: 1 }}>
           <h2>{product.title}</h2>
           <p>{product.description}</p>
         </div>
-        <div className="thumbnail-wrapper" style={{ flex: 1 }}>
-          <Image src={thumbnail} alt="Thumbnail" width={300} height={400} />
+        <div className="thumbnail-wrapper" style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', borderRadius: '15px', boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}>
+          <Image src={thumbnail} alt="Thumbnail" width={400} height={500} />
         </div>
         <div className="product-price" style={{ flex: 1 }}>
           <p>Price: ${product.price}</p>
           <ProductTabs product={product} />
         </div>
       </div>
-      <div className="image-gallery" style={{ width: '100%', marginTop: '20px' }}>
-        <ImageGallery images={otherImages} />
+      <div className="image-gallery" style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', marginTop: '20px' }}>
+        {otherImages.map((image, index) => (
+          <div key={index} style={{ margin: '5px' }}>
+            <Image src={image} alt={`Gallery image ${index}`} width={300} height={300} />
+          </div>
+        ))}
       </div>
       <div className="related-products">
         <RelatedProducts product={product} />
