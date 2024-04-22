@@ -16,14 +16,14 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   return (
     <div className="product-detail">
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px' }}>
-        <div className="product-info" style={{ flex: 1 }}>
+        <div className="product-info" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
           <h2>{product.title}</h2>
           <p>{product.description}</p>
         </div>
         <div className="thumbnail-wrapper" style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', borderRadius: '15px', boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}>
           <Image src={thumbnail} alt="Thumbnail" width={400} height={500} />
         </div>
-        <div className="product-price" style={{ flex: 1 }}>
+        <div className="product-price" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
           <p>Price: ${product.price}</p>
           <ProductTabs product={product} />
         </div>
