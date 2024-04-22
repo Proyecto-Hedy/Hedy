@@ -44,4 +44,16 @@
     color: #555; 
     align-self: flex-end;
   }
+
+  .image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Define el tamaño mínimo y máximo de cada columna */
+    gap: 10px; /* Espacio entre las imágenes */
+  }
+  
+  .image-gallery img {
+    max-width: 100%; /* Establece un ancho máximo para las imágenes */
+    height: auto; /* Mantiene la relación de aspecto */
+  }
+  
   
