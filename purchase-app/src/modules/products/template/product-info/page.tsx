@@ -1,5 +1,3 @@
-// ProductDetail.tsx
-
 import React from 'react';
 import ImageGallery from '@/modules/products/components/image-gallery/page';
 import ProductTabs from '@/modules/products/components/product-tabs/page';
