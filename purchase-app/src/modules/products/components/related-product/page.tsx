@@ -10,6 +10,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ product }) => {
   
   return (
     <div className="related-products">
+      <h2>Productos Relacionados</h2>
       {/* Muestra los productos relacionados */}
     </div>
   );

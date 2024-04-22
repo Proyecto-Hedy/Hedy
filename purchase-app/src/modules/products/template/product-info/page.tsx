@@ -15,17 +15,23 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
 
   return (
     <div className="product-detail">  
+    <div className="product-info">
       <h2>{product.title}</h2>
       <p>{product.description}</p>
+      </div>
       <div className="thumbnail-wrapper">
         <Image src={thumbnail} alt="Thumbnail" width={300} height={400} /> 
       </div>
+      <div className="product-price">
       <p>Price: ${product.price}</p>
       <ProductTabs product={product} />
+      </div>
       <div className="image-gallery">
         <ImageGallery images={otherImages} />
       </div>
+      <div className='related-products'>
       <RelatedProducts product={product} />
+      </div>
     </div>
   );
 };
