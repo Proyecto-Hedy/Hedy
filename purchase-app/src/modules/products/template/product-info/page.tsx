@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image'; // Importar el componente Image de Next.js
 import ImageGallery from '@/modules/products/components/image-gallery/page';
 import ProductTabs from '@/modules/products/components/product-tabs/page';
 import RelatedProducts from '@/modules/products/components/related-product/page';
@@ -9,13 +10,21 @@ interface ProductDetailProps {
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
+  const { thumbnail, images } = product; // Obtener la imagen de portada 
+  const otherImages = images.filter((image) => image !== thumbnail); // Filtrar las demás imágenes
+
   return (
-    <div className="product-detail">
+    <div className="product-detail">  
       <h2>{product.title}</h2>
       <p>{product.description}</p>
+      <div className="thumbnail-wrapper">
+        <Image src={thumbnail} alt="Thumbnail" width={300} height={400} /> 
+      </div>
       <p>Price: ${product.price}</p>
-      <ImageGallery images={product.images} />
       <ProductTabs product={product} />
+      <div className="image-gallery">
+        <ImageGallery images={otherImages} />
+      </div>
       <RelatedProducts product={product} />
     </div>
   );
