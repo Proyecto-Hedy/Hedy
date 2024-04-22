@@ -18,7 +18,6 @@ export const useApi = <T,>(path?: string) => {
     setIsLoading(true)
     
     try {
-      console.log("🚀 ~ fetchData ~ $URL:", $URL)
       const { data } = await axios.get<T>(`${$URL}${path}`)
       setData(data)
     } catch (err) {
