@@ -25,7 +25,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
         </div>
         <div className="product-price" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
           <ProductTabs product={product} />
-          <p>Price: ${product.price}</p>
+          <h3 style={{ fontSize: '1.5em', fontWeight: 'bold' }}>Price: ${product.price}</h3>
         </div>
       </div>
       <div className="image-gallery" style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', marginTop: '40px', marginBottom: '40px', padding: '20px', border: '1px solid #ddd', borderRadius: '15px' }}>
