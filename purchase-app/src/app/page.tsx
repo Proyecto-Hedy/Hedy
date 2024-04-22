@@ -5,6 +5,7 @@ import ProductsTemplate from "@/modules/products/template/product-template";
 import Pagination from "@/modules/pagination/page";
 import { useApi } from "@/hooks/useApi";
 import { IDataResponse } from "@/interfaces/data.interfaces";
+import router from "next/router";
 
 const Home = () => {
   const limit = 18;
@@ -43,6 +44,7 @@ const Home = () => {
           onPreviousClick={handlePreviousClick}
           onNextClick={handleNextClick}
         />
+        <br />
       </Container>
     </main>
   );
