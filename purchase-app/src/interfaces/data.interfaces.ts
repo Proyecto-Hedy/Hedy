@@ -1,3 +1,5 @@
+import { User } from "firebase/auth";
+
 export interface IDataResponse {
   products: IProductData[]
   total: number;
@@ -17,4 +19,10 @@ export interface IProductData {
   category: string;
   thumbnail: string;
   images: string[];
+}
+
+export interface AuthResponse {
+  response?: User;
+  status: number;
+  message?: string;
 }
