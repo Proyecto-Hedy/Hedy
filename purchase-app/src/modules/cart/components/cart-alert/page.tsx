@@ -3,15 +3,13 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const cartAlert = ({ product }: { product: any }) => {
-  const { title, image, price } = product;
+  const { title } = product;
 
   // Mostrar la notificación
   toast.success(
     <div style={{ display: 'flex', alignItems: 'center' }}>
-      <img src={image} alt={title} style={{ width: '50px', marginRight: '10px' }} />
       <div>
         <p>{title}</p>
-        <p>Precio: ${price}</p>
       </div>
 
     </div>,
