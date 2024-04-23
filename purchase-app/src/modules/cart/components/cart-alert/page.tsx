@@ -6,10 +6,6 @@ import Link from 'next/link';
 const cartAlert = ({ product }: { product: any }) => {
   const { title, image, price } = product;
 
-  const handleGoToCart = () => {
-    console.log('Ir al carrito');
-  };
-
   // Mostrar la notificación
   toast.dark(
     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -18,9 +14,7 @@ const cartAlert = ({ product }: { product: any }) => {
         <p>{title}</p>
         <p>Precio: ${price}</p>
       </div>
-      <Link href={`pages/cart`}>
-        <button onClick={handleGoToCart}>Ir al Carrito</button>
-      </Link>
+
     </div>,
     //href={`pages/cart}`
     {
