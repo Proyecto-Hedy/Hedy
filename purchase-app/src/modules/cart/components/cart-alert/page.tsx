@@ -7,15 +7,16 @@ const cartAlert = ({ product }: { product: any }) => {
 
   // Mostrar la notificación
   toast.success(
-    <div style={{ display: 'flex', alignItems: 'center' }}>
+    <div className="flex items-center text-black">
       <div>
+      <p className="font-semibold mr-2">¡Agregado al carrito!</p>
         <p>{title}</p>
       </div>
 
     </div>,
     //href={`pages/cart}`
     {
-      position: 'bottom-right',
+      position: 'top-right',
       autoClose: 3000, 
       hideProgressBar: true,
       closeOnClick: true,
