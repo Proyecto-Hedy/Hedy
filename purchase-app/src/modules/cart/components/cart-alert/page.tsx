@@ -1,7 +1,6 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Link from 'next/link';
 
 const cartAlert = ({ product }: { product: any }) => {
   const { title, image, price } = product;
