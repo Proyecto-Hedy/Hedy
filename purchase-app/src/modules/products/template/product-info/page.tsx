@@ -5,6 +5,7 @@ import ProductTabs from "@/modules/products/components/product-tabs/page";
 import RelatedProducts from "@/modules/products/components/related-product/page";
 import { IProductData } from "@/interfaces/data.interfaces";
 import Button from "@/components/atoms/Button";
+import { useDataContext } from "@/context/data.context";
 
 interface ProductDetailProps {
   product: IProductData;
