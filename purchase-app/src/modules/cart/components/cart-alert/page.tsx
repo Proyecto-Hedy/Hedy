@@ -7,7 +7,7 @@ const cartAlert = ({ product }: { product: any }) => {
   const { title, image, price } = product;
 
   // Mostrar la notificación
-  toast.dark(
+  toast.success(
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <img src={image} alt={title} style={{ width: '50px', marginRight: '10px' }} />
       <div>
