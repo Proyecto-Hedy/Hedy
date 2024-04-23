@@ -14,6 +14,13 @@ interface ProductDetailProps {
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   const { thumbnail, images } = product; // Obtener la imagen de portada
   const otherImages = images.filter((image) => image !== thumbnail); // Filtrar las demás imágenes
+  const { addToCart } = useDataContext();
+
+  const handleAddToCart = () => {
+    addToCart(product);
+    console.log("Product added to cart");
+    console.log(product);
+  }
 
   return (
     <div className="product-detail" style={{ marginTop: '50px', marginBottom: '5rem' }}>
@@ -34,6 +41,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
             <Button
               className="mb-0 mt-8 bg-black-btn hover:bg-black-hover hover:text-white text-xl font-medium text-gray-bg-light"
               name="Add to cart"
+              onClick={handleAddToCart}
             />
           </div>
         </div>

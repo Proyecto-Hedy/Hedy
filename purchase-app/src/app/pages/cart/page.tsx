@@ -1,20 +1,15 @@
-"use client"
-import { useDataContext } from "@/context/data.context";
-import { navigate } from "@/services/actions";
-import { useEffect } from "react";
+"use client";
+import React from 'react';
+import CartDetail from '@/modules/cart/template/cart-detail';
+import { useDataContext } from '@/context/data.context';
 
-export default function Cart() {
-    const { user } = useDataContext()
+const CartPage: React.FC = () => {
+  const { cart } = useDataContext(); 
+  return (
+    <div className="cart-page">
+      <CartDetail cart={cart} /> 
+    </div>
+  );
+};
 
-    useEffect(() => {
-        if (!user) {
-            navigate("/pages/account")
-        }
-    }, [user])
-
-    return !user ? <p>Loading...</p> : (
-        <div>
-            <h1>Cart</h1>
-        </div>
-    );
-}
+export default CartPage;
