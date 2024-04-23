@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
 
-const cartPreviewPage = ({ product }: { product: any }) => {
+const cartAlert = ({ product }: { product: any }) => {
   const { title, image, price } = product;
 
   const handleGoToCart = () => {
@@ -37,4 +37,4 @@ const cartPreviewPage = ({ product }: { product: any }) => {
   return null; 
 };
 
-export default cartPreviewPage;
+export default cartAlert;
