@@ -6,6 +6,7 @@ import RelatedProducts from "@/modules/products/components/related-product/page"
 import { IProductData } from "@/interfaces/data.interfaces";
 import Button from "@/components/atoms/Button";
 import { useDataContext } from "@/context/data.context";
+import cartPreviewPage from "@/modules/cart/components/cart-preview/page";
 
 interface ProductDetailProps {
   product: IProductData;
@@ -18,6 +19,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
 
   const handleAddToCart = () => {
     addToCart(product);
+    cartPreviewPage({ product });
     console.log("Product added to cart");
     console.log(product);
   }
