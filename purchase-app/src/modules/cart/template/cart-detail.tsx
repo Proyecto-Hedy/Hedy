@@ -28,26 +28,26 @@ const CartDetail: React.FC<CartDetailProps> = ({ cart, setCart }) => {
       return item;
     });
 
-    setCart(updatedCart); // Actualizamos el estado del carrito
+    setCart(updatedCart);
   };
 
   return (
-    <div className="cart-detail">
+    <div className="cart-detail max-w-lg mx-auto">
       <h2 className="text-2xl font-semibold mb-4">Carrito de Compras</h2>
       {cart.length === 0 ? (
         <p>El carrito está vacío.</p>
       ) : (
         <div>
           <div className="flex text-lg font-semibold">
-            <div className="w-1/4">Producto</div>
-            <div className="w-1/4">Cantidad</div>
-            <div className="w-1/4">Precio</div>
-            <div className="w-1/4">Total</div>
+            <div className="w-2/5">Producto</div>
+            <div className="w-1/5">Cantidad</div>
+            <div className="w-1/5">Precio</div>
+            <div className="w-1/5">Total</div>
           </div>
           <hr className="my-4 border-t border-gray-300" />
           {cart.map((item) => (
             <div className="flex items-center justify-between mb-4" key={item.id}>
-              <div className="w-1/4 flex items-center">
+              <div className="w-2/5 flex items-center">
                 <div className="w-12 h-12 mr-4">
                   <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover rounded" />
                 </div>
@@ -55,30 +55,33 @@ const CartDetail: React.FC<CartDetailProps> = ({ cart, setCart }) => {
                   <h3 className="text-lg font-semibold">{item.title}</h3>
                 </div>
               </div>
-            <div className="w-1/4">
+              <div className="w-1/5">
                 <label htmlFor={`quantity-${item.id}`} className="font-semibold">Cantidad:</label>
                 <select
-                    id={`quantity-${item.id}`}
-                    value={item.quantity}
-                    onChange={(event) => handleQuantityChange(event, item.id)}
-                    className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  id={`quantity-${item.id}`}
+                  value={item.quantity}
+                  onChange={(event) => handleQuantityChange(event, item.id)}
+                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 >
-                    {[...Array.from(Array(10).keys())].map((num) => (
-                        <option key={num + 1} value={num + 1}>
-                            {num + 1}
-                        </option>
-                    ))}
+                  {[...Array.from(Array(10).keys())].map((num) => (
+                    <option key={num + 1} value={num + 1}>
+                      {num + 1}
+                    </option>
+                  ))}
                 </select>
-            </div>
-              <div className="w-1/4">
+              </div>
+              <div className="w-1/5">
                 <p className="text-lg">${item.price}</p>
               </div>
-              <div className="w-1/4">
+              <div className="w-1/5">
                 <p className="text-lg">${item.price * item.quantity}</p>
               </div>
             </div>
           ))}
-          <p className="text-xl font-semibold mt-4">Total: ${calculateTotal()}</p>
+          <hr className="my-4 border-t border-gray-300" />
+          <div className="text-right">
+            <p className="text-xl font-semibold">Total: ${calculateTotal()}</p>
+          </div>
         </div>
       )}
     </div>
