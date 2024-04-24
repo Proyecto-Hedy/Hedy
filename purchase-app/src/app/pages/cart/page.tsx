@@ -9,7 +9,6 @@ const CartPage: React.FC = () => {
   return (
     <div className="container mx-auto py-8">
       <CartDetail cart={cart} setCart={addToCart} />
-        {/* <CartDetail cart={cart} setCart={addToCart} /> */}
     </div>
   );
 };

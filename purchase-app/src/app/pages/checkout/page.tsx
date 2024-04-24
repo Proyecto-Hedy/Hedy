@@ -3,26 +3,33 @@ import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import Line from "@/components/atoms/Line";
 import LoadingSpinner from "@/components/atoms/LoadingSpinner";
+import { useDataContext } from "@/context/data.context";
 import { IProductData } from "@/interfaces/data.interfaces";
+import { navigate } from "@/services/actions";
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
+  const { cart } = useDataContext()
+  console.log("🚀 ~ Checkout ~ cart:", cart)
   const [subtotal, setSubtotal] = useState<number>(0)
   const [shipping, setShipping] = useState<number>(0)
   const [total, setTotal] = useState<number>(0)
 
-  // Delete this
-  const [products, setData] = useState<IProductData[]>([])
-  const fechData = async () => {
-    const { data } = await axios.get("https://dummyjson.com/products?limit=3")
-    setData(data.products)
+  const handleCheckout = () => {
+    toast.success("Checkout successfully")
+    navigate("/")
   }
+
   useEffect(() => {
-    fechData()
-  }, [])
-  //
+    if (cart.length) {
+      const subtotal = cart.reduce((acumulador, actual) => acumulador + actual.price, 0);
+      setSubtotal(subtotal)
+      setTotal(subtotal)
+    }
+  }, [cart])
 
   return (
     <div id="checkout-container" 
@@ -182,21 +189,10 @@ const Checkout = () => {
         <div className="w-full flex flex-col bg-gray-bg p-8 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
           <h2 className="text-xl font-bold">In your cart</h2>
           <Line />
-          <div>
-            <div>
-              <p className="flex justify-between items-center pt-4">Subtotal <span>{subtotal}</span></p>
-              <p className="flex justify-between items-center pt-4">Shipping <span>{shipping}</span></p>
-            </div>
-            <Line />
-            <div>
-              <p className="flex justify-between items-center pt-4 font-semibold">Total <span>{total}</span></p>
-            </div>
-          </div>
-          <div id="product-container" className="mt-8">
-          <Line />
+          <div id="product-container">
             <div className="mt-8">
               {
-                products?.length ? products.map((product: IProductData) => {
+                cart?.length ? cart.map((product: IProductData) => {
                   return (
                     <>
                     <div key={product.id} className="w-full gap-2 flex items-center pb-4">
@@ -226,9 +222,19 @@ const Checkout = () => {
               }
             </div>
           </div>
+          <div>
+            <div>
+              <p className="flex justify-between items-center pt-4">Subtotal <span>$ {subtotal}</span></p>
+              <p className="flex justify-between items-center pt-4">Shipping <span>$ {shipping}</span></p>
+            </div>
+            <Line />
+            <div>
+              <p className="flex justify-between items-center pt-4 font-semibold">Total <span>$ {total}</span></p>
+            </div>
+          </div>
         </div>
         <div>
-          <Button name="Checkout"/>
+          <Button name="Checkout" onClick={handleCheckout} />
         </div>
       </div>
     </div>
