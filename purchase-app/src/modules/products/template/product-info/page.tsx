@@ -5,6 +5,10 @@ import ProductTabs from "@/modules/products/components/product-tabs/page";
 import RelatedProducts from "@/modules/products/components/related-product/page";
 import { IProductData } from "@/interfaces/data.interfaces";
 import Button from "@/components/atoms/Button";
+import { useDataContext } from "@/context/data.context";
+import cartAlert from "@/modules/cart/components/cart-alert/page";
+import { toast } from "react-toastify";
+import { navigate } from "@/services/actions";
 
 interface ProductDetailProps {
   product: IProductData;
@@ -13,6 +17,31 @@ interface ProductDetailProps {
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   const { thumbnail, images } = product; // Obtener la imagen de portada
   const otherImages = images.filter((image) => image !== thumbnail); // Filtrar las demás imágenes
+  const { cart, addToCart, user } = useDataContext();
+
+  const checkUser = () => {
+    if (!user) {
+      navigate("/pages/account")
+      return false
+    } 
+    else {
+      return true
+    }
+  }
+
+  const handleAddToCart = () => {
+    if (checkUser()) {
+      const isProductInCart = cart.some((item) => item.id === product.id);
+  
+      if (isProductInCart) {
+        toast.warning(`${product.title} is already added`)
+      }
+      else {
+        addToCart(product);
+        toast.success(`${product.title} successfully added`)
+      }
+    }
+  }
 
   return (
     <div className="product-detail" style={{ marginTop: '50px', marginBottom: '5rem' }}>
@@ -33,6 +62,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
             <Button
               className="mb-0 mt-8 bg-black-btn hover:bg-black-hover hover:text-white text-xl font-medium text-gray-bg-light"
               name="Add to cart"
+              onClick={handleAddToCart}
             />
           </div>
         </div>

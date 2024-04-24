@@ -13,6 +13,8 @@ import firebase_app from "@/services/firebase";
 interface IDataContext {
   user: User | null;
   setUser: Dispatch<SetStateAction<User | null>>;
+  cart: any[];
+  addToCart: (product: any) => void;
 }
 
 interface IDataProvideProps {
@@ -25,30 +27,54 @@ const auth = getAuth(firebase_app)
 const DataContext = createContext<IDataContext>({
   user: null,
   setUser: () => {},
+  cart: [],
+  addToCart: () => {},
 });
 
 // Creamos el Provider que envolvera nuestra app y/o componentes
 export const DataProvider = ({ children }: IDataProvideProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [cart, setCart] = useState<any[]>([]); 
 
-    useEffect(() => {
-      // Observador
-        const unsubscribe = onAuthStateChanged(auth, () => {
-          const user = auth.currentUser;
-          if (user) {
-              setUser(user);
-          } else {
-              setUser(null);
-          }
-          setLoading(false);
-        });
+  useEffect(() => {
+    // Observador
+    const unsubscribe = onAuthStateChanged(auth, () => {
+      const user = auth.currentUser;
+      if (user) {
+          setUser(user);
+      } else {
+          setUser(null);
+      }
+      setLoading(false);
+    });
 
-        return () => unsubscribe();
-    }, []);
+    return () => unsubscribe();
+  }, []);
+
+  // Función para agregar productos al carrito
+  const addToCart = (product: any) => {
+    const isProductInCart = cart.some((item) => Number(item.id) === Number(product.id));
+
+    if (isProductInCart) {
+      const updatedCart = cart.map((item) => {
+        if (item.id === product.id) {
+          const newQuantity = item.quantity + 1;
+          const newTotal = item.price * newQuantity;
+          return { ...item, quantity: newQuantity, total: newTotal };
+        }
+        return item;
+      });
+      setCart(updatedCart);
+    } else {
+      const total = product.price;
+      setCart((prevCart) => [...prevCart, { ...product, quantity: 1, total }]);
+    }
+  };
+  
 
   return (
-    <DataContext.Provider value={{ user, setUser }}>
+    <DataContext.Provider value={{ user, setUser, cart, addToCart }}>
       {children}
     </DataContext.Provider>
   );
