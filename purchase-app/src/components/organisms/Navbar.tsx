@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -10,19 +11,34 @@ import { useDataContext } from '@/context/data.context';
 import logOut from '@/services/auth/signOut';
 import { toast } from 'react-toastify';
 import GoogleAccount from '../molecules/GoogleAccount';
+import useApi from '@/hooks/useApi';
+import { IDataResponse } from '@/interfaces/data.interfaces';
 
 const Navbar = () => {
-  const { user } = useDataContext()
+  const { user, setFilteredProducts } = useDataContext()
+  const { fetchData, data } = useApi<IDataResponse>()
+
   const [isHover, setIsHover] = useState<boolean>(false)
 
-  const handleChangeInput = (value: string) => {
-    console.log("🚀 ~ handleChangeInput ~ value:", value)
+  const handleChangeInput = async (value: string) => {
+    await fetchData(`/search?q=${value}`)
   }
 
   const handleLogOut = async () => {
     const { message } = await logOut()
     toast.success(message, { toastId: "log out" })
   }
+
+  useEffect(() => {
+    if (data) {
+      if (data?.products.length) {
+        setFilteredProducts(data.products)
+      }
+      else {
+        toast.warning("Item not found", { toastId: "not_found" })
+      }
+    }
+  }, [data])
 
   return (
     <nav id='navbar' className="w-full bg-white text-black shadow-md">

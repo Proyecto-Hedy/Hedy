@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, createContext, useContext, useEffect, useStat
 
 import { User, getAuth, onAuthStateChanged } from "firebase/auth";
 import firebase_app from "@/services/firebase";
+import { IProductData } from "@/interfaces/data.interfaces";
 
 /**
  * Para utilizar Context, hay 3 elementos importantes que debemos tener en cuenta:
@@ -16,6 +17,8 @@ interface IDataContext {
   cart: any[];
   addToCart: (product: any) => void;
   clearCart: () => void;
+  filteredProducts: IProductData[];
+  setFilteredProducts: Dispatch<SetStateAction<IProductData[] | []>>;
 }
 
 interface IDataProvideProps {
@@ -31,12 +34,14 @@ const DataContext = createContext<IDataContext>({
   cart: [],
   addToCart: () => {},
   clearCart: () => {},
+  filteredProducts: [],
+  setFilteredProducts: () => {},
 });
 
 // Creamos el Provider que envolvera nuestra app y/o componentes
 export const DataProvider = ({ children }: IDataProvideProps) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [filteredProducts, setFilteredProducts] = useState<IProductData[]>([]);
   const [cart, setCart] = useState<any[]>([]); 
 
   useEffect(() => {
@@ -48,7 +53,6 @@ export const DataProvider = ({ children }: IDataProvideProps) => {
       } else {
           setUser(null);
       }
-      setLoading(false);
     });
 
     return () => unsubscribe();
@@ -79,7 +83,9 @@ export const DataProvider = ({ children }: IDataProvideProps) => {
   };
 
   return (
-    <DataContext.Provider value={{ user, setUser, cart, addToCart, clearCart  }}>
+    <DataContext.Provider value={{ 
+      user, setUser, cart, addToCart, clearCart, filteredProducts, setFilteredProducts
+    }}>
       {children}
     </DataContext.Provider>
   );
