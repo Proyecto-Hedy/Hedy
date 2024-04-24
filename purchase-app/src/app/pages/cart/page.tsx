@@ -43,13 +43,13 @@ const CartPage: React.FC = () => {
 
   return (
     <div className="container mx-auto py-8">
-      <h2 className="text-2xl font-semibold mb-4">Carrito de Compras</h2>
+      <h2 className="text-2xl font-semibold mb-4">Cart</h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <div className="cartHeader grid grid-cols-4">
-            <div>Producto</div>
-            <div>Cantidad</div>
-            <div>Precio</div>
+            <div>Item</div>
+            <div>Quantity</div>
+            <div>Price</div>
             <div>Total</div>
           </div>
           <hr className="my-4 border-t border-gray-300" />
@@ -90,14 +90,14 @@ const CartPage: React.FC = () => {
         </div>
         <div className="lg:col-span-1">
           <div className="bg-gray-bg p-4 rounded-lg">
-            <p className="text-xl font-semibold mb-4 border-b border-gray-300 pb-4">Total de la compra</p>
-            <p className="text-lg">Subtotal: <span className="float-right">${calculateSubtotal()}</span></p>
-            <p className="text-lg">Costo de envío: <span className="float-right">${SHIPPING_COST}</span></p>
+            <p className="text-xl font-semibold mb-4 border-b border-gray-300 pb-4">Summary</p>
+            <p className="text-lg">Subtotal <span className="float-right">${calculateSubtotal()}</span></p>
+            <p className="text-lg">Shipping <span className="float-right">${SHIPPING_COST}</span></p>
             <hr className="my-4 border-t border-gray-300" />
-            <p className="text-lg">Total: <span className="float-right">${calculateTotal()}</span></p>
+            <p className="text-lg">Total <span className="float-right">${calculateTotal()}</span></p>
             {/* Aquí puedes agregar más información adicional si lo deseas */}
             <button className="bg-black-btn hover:bg-black-hover text-white font-bold py-2 px-8 rounded-full mt-4 block w-full">
-              Pagar
+              Go to Checkout
             </button>
           </div>
         </div>
