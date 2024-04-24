@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface CartDetailProps {
   cart: CartItem[];
@@ -11,23 +11,28 @@ export interface CartItem {
   price: number;
   quantity: number;
   thumbnail: string;
+  total: number; 
 }
 
 const CartDetail: React.FC<CartDetailProps> = ({ cart, setCart }) => {
+  const [total, setTotal] = useState<number>(0);
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    console.log(cart);
+    return cart.reduce((total, item) => total + item.total, 0);
   };
 
   const handleQuantityChange = (event: React.ChangeEvent<HTMLSelectElement>, itemId: number) => {
     const selectedQuantity = parseInt(event.target.value, 10);
-
+  
     const updatedCart = cart.map((item) => {
       if (item.id === itemId) {
-        return { ...item, quantity: selectedQuantity };
+        const newTotal = item.price * selectedQuantity;
+        console.log(newTotal);
+        return { ...item, quantity: selectedQuantity, total: newTotal };
       }
       return item;
     });
-
+  
     setCart(updatedCart);
   };
 
@@ -45,8 +50,8 @@ const CartDetail: React.FC<CartDetailProps> = ({ cart, setCart }) => {
             <div className="w-1/5">Total</div>
           </div>
           <hr className="my-4 border-t border-gray-300" />
-          {cart.map((item) => (
-            <div className="flex items-center justify-between mb-4" key={item.id}>
+          {cart.map((item, index) => (
+            <div className="flex items-center justify-between mb-4" key={index}>
               <div className="w-2/5 flex items-center">
                 <div className="w-12 h-12 mr-4">
                   <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover rounded" />
@@ -74,7 +79,7 @@ const CartDetail: React.FC<CartDetailProps> = ({ cart, setCart }) => {
                 <p className="text-lg">${item.price}</p>
               </div>
               <div className="w-1/5">
-                <p className="text-lg">${item.price * item.quantity}</p>
+                <p className="text-xl font-semibold">${item.total}</p>
               </div>
             </div>
           ))}

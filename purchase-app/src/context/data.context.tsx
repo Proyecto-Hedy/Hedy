@@ -55,8 +55,24 @@ export const DataProvider = ({ children }: IDataProvideProps) => {
 
   // Función para agregar productos al carrito
   const addToCart = (product: any) => {
-    setCart((prevCart) => [...prevCart, product]);
+    const isProductInCart = cart.some((item) => item.id === product.id);
+  
+    if (isProductInCart) {
+      const updatedCart = cart.map((item) => {
+        if (item.id === product.id) {
+          const newQuantity = item.quantity + 1;
+          const newTotal = item.price * newQuantity;
+          return { ...item, quantity: newQuantity, total: newTotal };
+        }
+        return item;
+      });
+      setCart(updatedCart);
+    } else {
+      const total = product.price;
+      setCart((prevCart) => [...prevCart, { ...product, quantity: 1, total }]);
+    }
   };
+  
 
   return (
     <DataContext.Provider value={{ user, setUser, cart, addToCart }}>
