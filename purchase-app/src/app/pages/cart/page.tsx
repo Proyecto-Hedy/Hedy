@@ -37,10 +37,8 @@ const CartPage: React.FC = () => {
   return (
     <div className="container mx-auto py-8">
       <h2 className="text-2xl font-semibold mb-4">Carrito de Compras</h2>
-      {cart.length === 0 ? (
-        <p>El carrito está vacío.</p>
-      ) : (
-        <div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2">
           <div className="cartHeader grid grid-cols-4">
             <div>Producto</div>
             <div>Cantidad</div>
@@ -82,11 +80,18 @@ const CartPage: React.FC = () => {
             </div>
           ))}
           <hr className="my-4 border-t border-gray-300" />
-          <div className="cartTotal">
-            <p className="text-xl font-semibold">Total: ${calculateTotal()}</p>
+        </div>
+        <div className="lg:col-span-1">
+          <div className="bg-gray-bg p-4 rounded-lg">
+            <p className="text-xl font-semibold mb-4 border-b border-gray-300 pb-4">Total de la compra</p>
+            <p className="text-lg">Total: ${calculateTotal()}</p>
+            <hr className="my-4 border-t border-gray-300" />
+            <button className="bg-black-btn hover:bg-black-hover text-white font-bold py-2 px-8 rounded-full mt-4 block w-full">
+              Pagar
+            </button>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
