@@ -1,5 +1,6 @@
-"use client";
+ "use client";
 import React, { useState } from 'react';
+// import CartDetail from '@/modules/cart/template/cart-detail'; // ya no necesitas esta importación
 import { useDataContext } from '@/context/data.context';
 
 interface CartItem {
@@ -11,12 +12,18 @@ interface CartItem {
   total: number; 
 }
 
+const SHIPPING_COST = 10; // Costo de envío fijo (puedes cambiarlo según sea necesario)
+
 const CartPage: React.FC = () => {
   const { cart, addToCart } = useDataContext();
   const [cartFilter, setCartFilter] = useState<any>([]);
 
+  const calculateSubtotal = () => {
+    return cart.reduce((subtotal, item) => subtotal + item.total, 0);
+  };
+
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.total, 0);
+    return calculateSubtotal() + SHIPPING_COST;
   };
 
   const handleQuantityChange = (event: React.ChangeEvent<HTMLSelectElement>, itemId: number) => {
@@ -75,7 +82,7 @@ const CartPage: React.FC = () => {
                 <p className="text-lg">${item.price}</p>
               </div>
               <div className="w-1/5">
-                <p className="text-xl font-semibold">${item.total}</p>
+                <p className="text-xl font-semibold text-right">${item.total}</p>
               </div>
             </div>
           ))}
@@ -84,8 +91,11 @@ const CartPage: React.FC = () => {
         <div className="lg:col-span-1">
           <div className="bg-gray-bg p-4 rounded-lg">
             <p className="text-xl font-semibold mb-4 border-b border-gray-300 pb-4">Total de la compra</p>
-            <p className="text-lg">Total: ${calculateTotal()}</p>
+            <p className="text-lg">Subtotal: <span className="float-right">${calculateSubtotal()}</span></p>
+            <p className="text-lg">Costo de envío: <span className="float-right">${SHIPPING_COST}</span></p>
             <hr className="my-4 border-t border-gray-300" />
+            <p className="text-lg">Total: <span className="float-right">${calculateTotal()}</span></p>
+            {/* Aquí puedes agregar más información adicional si lo deseas */}
             <button className="bg-black-btn hover:bg-black-hover text-white font-bold py-2 px-8 rounded-full mt-4 block w-full">
               Pagar
             </button>
