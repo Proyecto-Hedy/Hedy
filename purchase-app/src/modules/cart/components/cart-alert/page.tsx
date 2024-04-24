@@ -1,6 +1,6 @@
-import React from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const cartAlert = ({ product }: { product: any }) => {
   const { title } = product;
@@ -8,17 +8,14 @@ const cartAlert = ({ product }: { product: any }) => {
   // Mostrar la notificación
   toast.success(
     <div className="flex items-center text-black">
-      <div>
       <p className="font-semibold mr-2">¡Agregado al carrito!</p>
-        <p>{title}</p>
-      </div>
-
+      <p>{title}</p>
     </div>,
     //href={`pages/cart}`
     {
-      position: 'top-right',
-      autoClose: 3000, 
-      hideProgressBar: true,
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
@@ -26,7 +23,7 @@ const cartAlert = ({ product }: { product: any }) => {
     }
   );
 
-  return null; 
+  return null;
 };
 
 export default cartAlert;
