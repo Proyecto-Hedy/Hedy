@@ -19,7 +19,8 @@ const cartAlert = ({ product }: { product: any }) => {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      progress: undefined,
+      progressStyle: { backgroundColor: '#34D399' }, 
+      //bodyClassName: 'bg-white', 
     }
   );
 
