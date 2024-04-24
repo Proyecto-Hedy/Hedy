@@ -15,6 +15,7 @@ interface IDataContext {
   setUser: Dispatch<SetStateAction<User | null>>;
   cart: any[];
   addToCart: (product: any) => void;
+  clearCart: () => void;
 }
 
 interface IDataProvideProps {
@@ -29,6 +30,7 @@ const DataContext = createContext<IDataContext>({
   setUser: () => {},
   cart: [],
   addToCart: () => {},
+  clearCart: () => {},
 });
 
 // Creamos el Provider que envolvera nuestra app y/o componentes
@@ -72,9 +74,12 @@ export const DataProvider = ({ children }: IDataProvideProps) => {
     }
   };
   
+  const clearCart = () => {
+    setCart([]);
+  };
 
   return (
-    <DataContext.Provider value={{ user, setUser, cart, addToCart }}>
+    <DataContext.Provider value={{ user, setUser, cart, addToCart, clearCart  }}>
       {children}
     </DataContext.Provider>
   );

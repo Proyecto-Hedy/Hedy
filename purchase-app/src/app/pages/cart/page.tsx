@@ -1,22 +1,19 @@
- "use client";
+"use client";
+
 import React, { useState } from 'react';
-// import CartDetail from '@/modules/cart/template/cart-detail'; // ya no necesitas esta importación
 import { useDataContext } from '@/context/data.context';
+import Link from 'next/link';
+import Button from "@/components/atoms/Button";
+import Line from "@/components/atoms/Line";
+import { toast } from "react-toastify";
 
-interface CartItem {
-  id: number;
-  title: string;
-  price: number;
-  quantity: number;
-  thumbnail: string;
-  total: number; 
-}
-
-const SHIPPING_COST = 10; // Costo de envío fijo (puedes cambiarlo según sea necesario)
+const SHIPPING_COST = 10; 
 
 const CartPage: React.FC = () => {
   const { cart, addToCart } = useDataContext();
-  const [cartFilter, setCartFilter] = useState<any>([]);
+  const [subtotal, setSubtotal] = useState<number>(0);
+  const [shipping, setShipping] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
 
   const calculateSubtotal = () => {
     return cart.reduce((subtotal, item) => subtotal + item.total, 0);
@@ -38,7 +35,11 @@ const CartPage: React.FC = () => {
       return item;
     });
     // setCart(updatedCart);
-  
+  };
+
+  const handleCheckout = () => {
+    toast.success("Checkout successfully");
+    
   };
 
   return (
@@ -52,7 +53,7 @@ const CartPage: React.FC = () => {
             <div>Price</div>
             <div>Total</div>
           </div>
-          <hr className="my-4 border-t border-gray-300" />
+          <Line />
           {cart.map((item, index) => (
             <div className="productContainer grid grid-cols-4 border-b border-gray-300 py-4" key={index}>
               <div className="flex items-center">
@@ -86,19 +87,19 @@ const CartPage: React.FC = () => {
               </div>
             </div>
           ))}
-          <hr className="my-4 border-t border-gray-300" />
         </div>
         <div className="lg:col-span-1">
           <div className="bg-gray-bg p-4 rounded-lg">
-            <p className="text-xl font-semibold mb-4 border-b border-gray-300 pb-4">Summary</p>
+            <p className="text-xl font-semibold pb-4">Summary</p>
+            <Line />
             <p className="text-lg">Subtotal <span className="float-right">${calculateSubtotal()}</span></p>
             <p className="text-lg">Shipping <span className="float-right">${SHIPPING_COST}</span></p>
-            <hr className="my-4 border-t border-gray-300" />
+            <Line />
             <p className="text-lg">Total <span className="float-right">${calculateTotal()}</span></p>
-            {/* Aquí puedes agregar más información adicional si lo deseas */}
-            <button className="bg-black-btn hover:bg-black-hover text-white font-bold py-2 px-8 rounded-full mt-4 block w-full">
-              Go to Checkout
-            </button>
+            <Line />
+            <Link href="checkout">
+            <Button name="Go to Checkout" onClick={handleCheckout} />
+            </Link>
           </div>
         </div>
       </div>

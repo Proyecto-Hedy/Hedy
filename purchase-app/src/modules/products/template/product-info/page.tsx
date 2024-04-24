@@ -6,7 +6,6 @@ import RelatedProducts from "@/modules/products/components/related-product/page"
 import { IProductData } from "@/interfaces/data.interfaces";
 import Button from "@/components/atoms/Button";
 import { useDataContext } from "@/context/data.context";
-import cartAlert from "@/modules/cart/components/cart-alert/page";
 import { toast } from "react-toastify";
 import { navigate } from "@/services/actions";
 

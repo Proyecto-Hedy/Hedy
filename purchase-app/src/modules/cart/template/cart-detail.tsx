@@ -1,4 +1,7 @@
+import Button from '@/components/atoms/Button';
+import { navigate } from '@/services/actions';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 interface CartDetailProps {
   cart: CartItem[];
@@ -33,8 +36,14 @@ const CartDetail: React.FC<CartDetailProps> = ({ cart, setCart }) => {
       return item;
     });
   
-    setCart(updatedCart);
+    //setCart(updatedCart);
+
   };
+
+  const handlePlaceOrder = () => {
+    toast.success("Order successfully placed")
+    navigate("/pages/checkout")
+  }
 
   return (
     <div className="cart-detail max-w-lg mx-auto">
@@ -87,6 +96,7 @@ const CartDetail: React.FC<CartDetailProps> = ({ cart, setCart }) => {
           <div className="text-right">
             <p className="text-xl font-semibold">Total: ${calculateTotal()}</p>
           </div>
+          <Button name='Checkout' onClick={handlePlaceOrder} />
         </div>
       )}
     </div>
