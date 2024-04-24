@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from 'react';
-// import CartDetail from '@/modules/cart/template/cart-detail'; // ya no necesitas esta importación
 import { useDataContext } from '@/context/data.context';
 
 interface CartItem {
@@ -50,7 +49,7 @@ const CartPage: React.FC = () => {
           </div>
           <hr className="my-4 border-t border-gray-300" />
           {cart.map((item, index) => (
-            <div className="productContainer grid grid-cols-4" key={index}>
+            <div className="productContainer grid grid-cols-4 border-b border-gray-300 py-4" key={index}>
               <div className="flex items-center">
                 <img src={item.thumbnail} alt={item.title} className="productImage w-16 h-16 mr-4" />
                 <div className="productDetails">
