@@ -12,6 +12,8 @@ export default function ErrorHandler(errorCode: string, message: string) {
       return "Email/password accounts are not enabled."
     case "auth/user-disabled":
       return "Email account is disabled."
+    case "auth/unauthorized-domain":
+      return "This domain hasn`t access."
     default:
       return message
   }
