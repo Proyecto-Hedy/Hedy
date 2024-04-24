@@ -45,6 +45,10 @@ const CartPage: React.FC = () => {
   return (
     <div className="container mx-auto py-8">
       <h2 className="text-2xl font-semibold mb-4">Cart</h2>
+      {cart.length === 0 ? (
+        <p>You don't have anything in your cart.</p>
+      ) : (
+        <div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <div className="cartHeader grid grid-cols-4">
@@ -103,7 +107,10 @@ const CartPage: React.FC = () => {
           </div>
         </div>
       </div>
+    
     </div>
+  )};
+  </div>
   );
 };
 
