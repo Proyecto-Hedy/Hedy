@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useDataContext } from '@/context/data.context';
 import Link from 'next/link';
 import Button from "@/components/atoms/Button";
@@ -11,9 +11,6 @@ const SHIPPING_COST = 0;
 
 const CartPage: React.FC = () => {
   const { cart, addToCart } = useDataContext();
-  const [subtotal, setSubtotal] = useState<number>(0);
-  const [shipping, setShipping] = useState<number>(0);
-  const [total, setTotal] = useState<number>(0);
 
   const calculateSubtotal = () => {
     return cart.reduce((subtotal, item) => subtotal + item.total, 0);
@@ -34,12 +31,10 @@ const CartPage: React.FC = () => {
       }
       return item;
     });
-    // setCart(updatedCart);
   };
 
   const handleCheckout = () => {
     toast.success("Checkout successfully");
-    
   };
 
   return (
@@ -107,7 +102,6 @@ const CartPage: React.FC = () => {
           </div>
         </div>
       </div>
-    
     </div>
   )};
   </div>
