@@ -19,6 +19,8 @@ export interface IProductData {
   category: string;
   thumbnail: string;
   images: string[];
+  total?: number
+  quantity?: number
 }
 
 export interface AuthResponse {

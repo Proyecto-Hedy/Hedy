@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 
 const Checkout = () => {
   const { cart, clearCart } = useDataContext()
-  console.log("🚀 ~ Checkout ~ cart:", cart)
+
   const [subtotal, setSubtotal] = useState<number>(0)
   const [shipping, setShipping] = useState<number>(0)
   const [total, setTotal] = useState<number>(0)
@@ -26,7 +26,7 @@ const Checkout = () => {
 
   useEffect(() => {
     if (cart.length) {
-      const subtotal = cart.reduce((acumulador, actual) => acumulador + actual.price, 0);
+      const subtotal = cart.reduce((acumulador, actual) => acumulador + actual.total, 0);
       setSubtotal(subtotal)
       setTotal(subtotal)
     }
@@ -209,10 +209,8 @@ const Checkout = () => {
                         <h3>{product.title} - <span>{product.brand}</span></h3>
                         <p>{product.description}</p>
                       </div>
-                      <div className="w-[13%] text-end	">
-                        {/* Add quantity here */}
-                        <p>{product.price}</p>
-                        {/* Add total here */}
+                      <div className="w-[13%] text-end">
+                        <p>{product.quantity}x ${product.price}</p>
                       </div>
                     </div>
                     <Line />
@@ -230,7 +228,7 @@ const Checkout = () => {
             </div>
             <Line />
             <div>
-              <p className="flex justify-between items-center pt-4 font-semibold">Total <span>$ {total}</span></p>
+              <p className="flex justify-between items-center text-xl pt-4 font-semibold">Total <span>$ {total}</span></p>
             </div>
           </div>
         </div>
