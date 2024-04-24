@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 interface CartDetailProps {
   cart: CartItem[];
-  setCart: (updatedCart: any) => void; // Función para actualizar el carrito
+  setCart: (updatedCart: CartItem[]) => void; // Función para actualizar el carrito
 }
 
 export interface CartItem {
@@ -15,24 +15,25 @@ export interface CartItem {
 }
 
 const CartDetail: React.FC<CartDetailProps> = ({ cart, setCart }) => {
-  const [cartFilter, setCartFilter] = useState<any>([]);
+  const [total, setTotal] = useState<number>(0);
   const calculateTotal = () => {
+    console.log(cart);
     return cart.reduce((total, item) => total + item.total, 0);
   };
 
   const handleQuantityChange = (event: React.ChangeEvent<HTMLSelectElement>, itemId: number) => {
     const selectedQuantity = parseInt(event.target.value, 10);
-
+  
     const updatedCart = cart.map((item) => {
       if (item.id === itemId) {
         const newTotal = item.price * selectedQuantity;
-        setCart(item);
+        console.log(newTotal);
         return { ...item, quantity: selectedQuantity, total: newTotal };
       }
       return item;
     });
-    // setCart(updatedCart);
   
+    setCart(updatedCart);
   };
 
   return (
