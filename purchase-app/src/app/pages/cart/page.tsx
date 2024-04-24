@@ -7,7 +7,7 @@ import Button from "@/components/atoms/Button";
 import Line from "@/components/atoms/Line";
 import { toast } from "react-toastify";
 
-const SHIPPING_COST = 10; 
+const SHIPPING_COST = 0; 
 
 const CartPage: React.FC = () => {
   const { cart, addToCart } = useDataContext();
