@@ -23,7 +23,7 @@ const Home = () => {
   };
 
   return (
-    <main className="m-20 flex min-h-screen flex-col items-center justify-between">
+    <main className="m-20 mb-4 flex min-h-screen flex-col items-center justify-between">
       <Container>
         {isLoading ? (
           <LoadingSpinner />
