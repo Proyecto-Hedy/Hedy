@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Checkout = () => {
-  const { cart } = useDataContext()
+  const { cart, clearCart } = useDataContext()
   console.log("🚀 ~ Checkout ~ cart:", cart)
   const [subtotal, setSubtotal] = useState<number>(0)
   const [shipping, setShipping] = useState<number>(0)
@@ -20,6 +20,7 @@ const Checkout = () => {
 
   const handleCheckout = () => {
     toast.success("Checkout successfully")
+    clearCart();
     navigate("/")
   }
 
