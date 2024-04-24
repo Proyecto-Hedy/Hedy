@@ -7,6 +7,8 @@ import { IProductData } from "@/interfaces/data.interfaces";
 import Button from "@/components/atoms/Button";
 import { useDataContext } from "@/context/data.context";
 import cartAlert from "@/modules/cart/components/cart-alert/page";
+import { toast } from "react-toastify";
+import { navigate } from "@/services/actions";
 
 interface ProductDetailProps {
   product: IProductData;
@@ -15,13 +17,30 @@ interface ProductDetailProps {
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   const { thumbnail, images } = product; // Obtener la imagen de portada
   const otherImages = images.filter((image) => image !== thumbnail); // Filtrar las demás imágenes
-  const { addToCart } = useDataContext();
+  const { cart, addToCart, user } = useDataContext();
+
+  const checkUser = () => {
+    if (!user) {
+      navigate("/pages/account")
+      return false
+    } 
+    else {
+      return true
+    }
+  }
 
   const handleAddToCart = () => {
-    addToCart(product);
-    cartAlert({ product });
-    console.log("Product added to cart");
-    console.log(product);
+    if (checkUser()) {
+      const isProductInCart = cart.some((item) => item.id === product.id);
+  
+      if (isProductInCart) {
+        toast.warning(`${product.title} is already added`)
+      }
+      else {
+        addToCart(product);
+        toast.success(`${product.title} successfully added`)
+      }
+    }
   }
 
   return (

@@ -14,7 +14,6 @@ interface IDataContext {
   user: User | null;
   setUser: Dispatch<SetStateAction<User | null>>;
   cart: any[];
-  //setCart: Dispatch<SetStateAction<any[]>>;
   addToCart: (product: any) => void;
 }
 
@@ -55,8 +54,8 @@ export const DataProvider = ({ children }: IDataProvideProps) => {
 
   // Función para agregar productos al carrito
   const addToCart = (product: any) => {
-    const isProductInCart = cart.some((item) => item.id === product.id);
-  
+    const isProductInCart = cart.some((item) => Number(item.id) === Number(product.id));
+
     if (isProductInCart) {
       const updatedCart = cart.map((item) => {
         if (item.id === product.id) {
