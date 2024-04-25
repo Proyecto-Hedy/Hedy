@@ -36,7 +36,6 @@ const CartPage: React.FC = () => {
   const handleCheckout = () => {
     toast.success("Checkout successfully");
   };
-//pading 2px, margin 2px = 4 en total
 return (
   <div className="container mx-auto py-8">
       <h2 className="text-2xl font-semibold mb-4">Cart</h2>
