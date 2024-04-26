@@ -75,7 +75,7 @@ const Navbar = () => {
                   </Link>
                 )
                 : (
-                  <><Link className='p-2 hover:bg-gray-bg-light hover:text-white rounded-lg' href="pages/profile">
+                  <><Link className='p-2 hover:bg-gray-bg-light hover:text-white rounded-lg' href="/pages/profile">
                     Profile
                     </Link>
                     <button
