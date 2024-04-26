@@ -72,8 +72,8 @@ const Profile: React.FC = () => {
     <div className="mt-8 flex justify-center items-start p-8 m-16 gap-12 relative">
       <div className="flex w-full max-w-screen-lg">
         {user && (
-          <div className="flex flex-col gap-3 mr-8" style={{ height: "500px" }}>
-            <div className="bg-white p-8 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] mb-8 flex-grow flex flex-col justify-between">
+          <div className="flex flex-col gap-3 mr-8" style={{ height: "500px", width: "500px" }}>
+            <div className="bg-white p-8 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] mb-8 flex-grow flex flex-col justify-between items-center">
               <div>
                 <h1 className="text-2xl font-semibold mb-4">Menu</h1>
                 <Line />
@@ -94,8 +94,8 @@ const Profile: React.FC = () => {
           </div>
         )}
         <div className="border-l border-gray-300 h-full gap-3" />
-        <div className={`flex flex-col w-${user ? "3/4" : "full"}`}>
-          <div className="bg-white p-8 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] mb-8">
+        <div className={`flex flex-col w-${user ? "full" : "full"}`}>
+          <div className="bg-white p-8 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] mb-8" style={{ width: "800px" }}>
             <h1 className="text-4xl font-semibold mb-8">Orders</h1>
             <div className="text-xl mb-8">
               {user ? (
