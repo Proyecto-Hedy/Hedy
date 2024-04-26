@@ -1,8 +1,9 @@
-"use client";
+"use client"
 import React, { useEffect, useState } from "react";
 import { Metadata } from "next";
 import { useDataContext } from "@/context/data.context";
 import { IProductData } from "@/interfaces/data.interfaces";
+import Line from "@/components/atoms/Line";
 
 const Profile: React.FC = () => {
   const { user } = useDataContext();
@@ -40,19 +41,20 @@ const Profile: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center h-full">
-      <div className="max-w-lg bg-white p-8 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-        <h1 className="text-2xl font-semibold mb-4">Profile</h1>
-        <div className="text-lg mb-4">
+      <div className="w-full max-w-screen-lg bg-white p-8 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+        <h1 className="text-4xl font-semibold mb-8">Profile</h1>
+        <div className="text-xl mb-8">
           {user ? (
             <>
               <p>Welcome, {user.email} </p>
               <p>Your recent purchases:</p>
+              <Line />
               <ul>
                 {products.map((product) => (
                   <li key={product.id} className="flex items-center gap-4">
                     <img src={product.thumbnail} alt={product.title} className="w-16 h-16 rounded-md" />
                     <div>
-                      <p className="text-lg font-semibold">{product.title}</p>
+                      <p className="text-xl font-semibold">{product.title}</p>
                       <p className="text-gray-600">{product.brand}</p>
                       <p className="text-gray-600">${product.price}</p>
                     </div>
