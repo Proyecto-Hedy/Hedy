@@ -1,9 +1,10 @@
-"use client"
+"use client";
+
 import React, { useEffect, useState } from "react";
-import { Metadata } from "next";
 import { useDataContext } from "@/context/data.context";
 import { IProductData } from "@/interfaces/data.interfaces";
 import Line from "@/components/atoms/Line";
+import Image from "next/image";
 
 const Profile: React.FC = () => {
   const { user } = useDataContext();
@@ -33,32 +34,49 @@ const Profile: React.FC = () => {
         total: 549,
         quantity: 1,
       },
-      // Puedes agregar más productos simulados aquí si lo deseas
+      
     ];
 
     setProducts(simulatedProducts);
   }, []);
 
   return (
-    <div className="flex justify-center items-center h-full">
+    <div className="mt-8 flex justify-center items-start p-8 m-16 mt-8 gap-12 relative">
       <div className="w-full max-w-screen-lg bg-white p-8 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-        <h1 className="text-4xl font-semibold mb-8">Profile</h1>
+        <h1 className="text-4xl font-semibold mb-8">Orders</h1>
         <div className="text-xl mb-8">
           {user ? (
             <>
-              <p>Welcome, {user.email} </p>
+              <div className="mt-8 flex justify-center items-start relative">
+                <p className="text-gray-600 text-sm mb-4 text-right absolute top-0 right-0 mt-[-50px]">
+                Signed in as: {user.email}
+                </p>
+              </div>
               <p>Your recent purchases:</p>
               <Line />
               <ul>
-                {products.map((product) => (
-                  <li key={product.id} className="flex items-center gap-4">
-                    <img src={product.thumbnail} alt={product.title} className="w-16 h-16 rounded-md" />
-                    <div>
-                      <p className="text-xl font-semibold">{product.title}</p>
-                      <p className="text-gray-600">{product.brand}</p>
-                      <p className="text-gray-600">${product.price}</p>
+                {products.map((product, index) => (
+                  <div key={product.id}>
+                    <div className="flex items-center gap-4">
+                      <div className="relative w-28 h-28 rounded-md overflow-hidden">
+                        <Image
+                          src={product.thumbnail}
+                          alt={product.title}
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-xl font-semibold">{product.title}</p>
+                        <p className="text-gray-600">{product.brand}</p>
+                        <p className="text-gray-600">${product.price}</p>
+                        <p className="text-gray-600">Quantity: {product.quantity}</p>
+                      </div>
                     </div>
-                  </li>
+                    {index !== products.length - 1 && (
+                      <hr className="my-4 border-gray-300" />
+                    )}
+                  </div>
                 ))}
               </ul>
             </>
