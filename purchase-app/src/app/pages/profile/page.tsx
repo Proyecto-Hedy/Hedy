@@ -13,7 +13,6 @@ const Profile: React.FC = () => {
   const [products, setProducts] = useState<IProductData[]>([]);
 
   useEffect(() => {
-    // Simulación de carga de productos
     const simulatedProducts: IProductData[] = [
     ];
 
