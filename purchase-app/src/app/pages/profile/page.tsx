@@ -56,7 +56,7 @@ const Profile: React.FC = () => {
         ],
         total: 549,
         quantity: 1,
-      },
+      }
       
     ];
 
@@ -75,11 +75,11 @@ const Profile: React.FC = () => {
           <div className="flex flex-col gap-3 mr-8" style={{ height: "500px", width: "500px" }}>
             <div className="bg-white p-8 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] mb-8 flex-grow flex flex-col justify-between items-center">
               <div>
-                <h1 className="text-2xl font-semibold mb-4">Menu</h1>
+                <h1 className="text-2xl font-semibold mb-4">Account</h1>
                 <Line />
-                <ul className="flex flex-col gap-4">
+                <ul className="flex flex-col gap-4 items-center">
                   <li>
-                    <button className="text-blue-500 hover:underline">
+                    <button className="text-blue-500 hover:underline ">
                       Orders
                     </button>
                   </li>
@@ -114,12 +114,12 @@ const Profile: React.FC = () => {
                           <div className="relative w-28 h-28 rounded-md overflow-hidden">
                             <Image src={product.thumbnail} alt={product.title} layout="fill" objectFit="cover" />
                           </div>
-                          <div>
-                            <p className="text-xl font-semibold"> {product.title}</p>
-                            <p className="text-gray-600">{product.brand}</p>
-                            <p className="text-gray-600">${product.price}</p>
-                            <p className="text-gray-600">Quantity: {product.quantity}</p>
-                          </div>
+                          <div className="w-full">
+                          <p className="text-xl font-semibold">{product.title}</p>
+                          <p className="flex justify-between text-gray-600">Brand <span className="float-right">{product.brand}</span></p>
+                          <p className="flex justify-between text-gray-600">Price <span className="float-right">${product.price}</span></p>
+                          <p className="flex justify-between text-gray-600">Quantity <span className="float-right">{product.quantity}</span></p>
+                        </div>
                         </div>
                         {index !== products.length - 1 && (
                           <hr className="my-4 border-gray-300" />
@@ -137,8 +137,6 @@ const Profile: React.FC = () => {
       </div>
     </div>
   );
-  
-  
 };
 
 export default Profile;
