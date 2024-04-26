@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Button from "@/components/atoms/Button";
 import Line from "@/components/atoms/Line";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 const SHIPPING_COST = 0; 
 
@@ -54,7 +55,7 @@ return (
             {cart.map((item, index) => (
               <div className="productContainer grid grid-cols-4 border-b border-gray-300 py-4 items-center" key={index}>
                 <div className="flex items-center">
-                  <img src={item.thumbnail} alt={item.title} className="productImage w-16 h-16 mr-4" />
+                <Image src={item.thumbnail} alt={item.title} width={64} height={64} className="productImage mr-4" style={{ width: "4rem", height: "4rem" }} />
                   <div className="productDetails p-2">
                     <h3 className="text-lg font-semibold">{item.title}</h3>
                   </div>
