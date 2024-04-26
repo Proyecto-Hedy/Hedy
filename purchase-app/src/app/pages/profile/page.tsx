@@ -52,7 +52,7 @@ const Profile: React.FC = () => {
         )}
         <div className="border-l border-gray-300 h-full gap-3" />
         <div className={`flex flex-col w-${user ? "full" : "full"}`}>
-          <div className="bg-white p-8 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] mb-8" style={{ width: "800px" }}>
+          <div className="bg-white p-8 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] mb-8"  style={{ width: user ? "800px" : "100%" }}>
             <h1 className="text-4xl font-semibold mb-8">Orders</h1>
             <div className="text-xl mb-8">
               {user ? (
