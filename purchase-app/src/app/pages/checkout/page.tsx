@@ -1,27 +1,99 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
-import Button from "@/components/atoms/Button";
-import Input from "@/components/atoms/Input";
-import Line from "@/components/atoms/Line";
-import LoadingSpinner from "@/components/atoms/LoadingSpinner";
-import { useDataContext } from "@/context/data.context";
-import { IProductData } from "@/interfaces/data.interfaces";
-import { navigate } from "@/services/actions";
-import axios from "axios";
+import { toast } from "react-toastify";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+
+import Button from "@/components/atoms/Button";
+import Line from "@/components/atoms/Line";
+import LoadingSpinner from "@/components/atoms/LoadingSpinner";
+import DeliveryCard from "@/components/molecules/DeliveryCard";
+import FormInput from "@/components/molecules/FormInput";
+import PaymentCard from "@/components/molecules/PaymentCard";
+
+import { useDataContext } from "@/context/data.context";
+
+import { FormInputProps, IProductData, UserAddress } from "@/interfaces/data.interfaces";
+
+import { navigate } from "@/services/actions";
 
 const Checkout = () => {
   const { cart, clearCart } = useDataContext()
 
   const [subtotal, setSubtotal] = useState<number>(0)
   const [shipping, setShipping] = useState<number>(0)
+  const [payment, setPayment] = useState<string>("")
   const [total, setTotal] = useState<number>(0)
+  const [shippingAddress, setShippingAddress] = useState<UserAddress>()
+
+  const handleShippingAddres = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShippingAddress(prev => {
+      if (prev){
+        return {
+          ...prev,
+          [(e.target.name).split(" ").join("_").toLocaleLowerCase()]: e.target.value 
+        }
+      }
+    })
+  }
+
+  const shippingAddressOptions: FormInputProps[] = [
+    {
+      id: 1,
+      onChange: (e) => handleShippingAddres(e),
+      placeholder: "First name",
+      required: true,
+      title: "Enter your first name",
+    },
+    {
+      id: 2,
+      onChange: (e) => handleShippingAddres(e),
+      placeholder: "Last name",
+      required: true,
+      title: "Enter your last name",
+    },
+    {
+      id: 3,
+      onChange: (e) => handleShippingAddres(e),
+      placeholder: "Address",
+      required: true,
+      title: "Enter your address",
+    },
+    {
+      id: 4,
+      onChange: (e) => handleShippingAddres(e),
+      placeholder: "City",
+      required: true,
+      title: "Enter your city",
+    },
+    {
+      id: 5,
+      onChange: (e) => handleShippingAddres(e),
+      placeholder: "State",
+      required: true,
+      title: "Enter your state",
+    },
+    {
+      id: 6,
+      onChange: (e) => handleShippingAddres(e),
+      placeholder: "Phone",
+      required: true,
+      title: "Enter your phone",
+    }
+  ]
 
   const handleCheckout = () => {
     toast.success("Checkout successfully")
     clearCart();
     navigate("/")
+  }
+
+  const handleDelivery = (price: number) => {
+    setShipping(prev => prev === price ? 0 : price)
+  }
+
+  const handlePayment = (payment: string) => {
+    setPayment(payment)
   }
 
   useEffect(() => {
@@ -32,6 +104,10 @@ const Checkout = () => {
     }
   }, [cart])
 
+  useEffect(() => {
+    setTotal(subtotal + shipping)
+  }, [shipping])
+
   return (
     <div id="checkout-container" 
       className="grid grid-cols-[1fr_600px] p-8 m-16 mt-8 gap-12 relative">
@@ -41,150 +117,56 @@ const Checkout = () => {
           <div>
             <h2 className="text-xl font-bold">Shipping Address</h2>
           </div>
-          <form action="" className="mt-8">
+          <form className="mt-8">
             <div className="pb-8">
               <div className="grid grid-cols-2 gap-8">
-                <div className="flex flex-col w-full">
-                  <div className="flex relative z-0 w-full txt-compact-medium">
-                    <Input
-                      onChange={() => console.log("!")}
-                      placeholder="First name"
-                      required
-                      title="Enter your first name"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col w-full">
-                  <div className="flex relative z-0 w-full txt-compact-medium">
-                    <Input
-                      onChange={() => console.log("!")}
-                      placeholder="Last name"
-                      required
-                      title="Enter your last name"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col w-full">
-                  <div className="flex relative z-0 w-full txt-compact-medium">
-                    <Input
-                      onChange={() => console.log("!")}
-                      placeholder="Address"
-                      required
-                      title="Enter your address"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col w-full">
-                  <div className="flex relative z-0 w-full txt-compact-medium">
-                    <Input
-                      onChange={() => console.log("!")}
-                      placeholder="City"
-                      required
-                      title="Enter your city"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col w-full">
-                  <div className="flex relative z-0 w-full txt-compact-medium">
-                    <Input
-                      onChange={() => console.log("!")}
-                      placeholder="State"
-                      required
-                      title="Enter your state"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col w-full">
-                  <div className="flex relative z-0 w-full txt-compact-medium">
-                    <Input
-                      onChange={() => console.log("!")}
-                      placeholder="Phone"
-                      required
-                      title="Enter your phone"
-                    />
-                  </div>
-                </div>
-
+                {shippingAddressOptions.map((options: FormInputProps) => (
+                  <FormInput
+                    key={options.id}
+                    onChange={options.onChange}
+                    placeholder={options.placeholder}
+                    required={options.required}
+                    title={options.title}
+                  />
+                  )
+                )}
               </div>
             </div>
           </form>
           {/* Molecula - Shipping address */}
         </div>
-        <div id="delivery-container" className="p-8 mt-16 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-          {/* Molecula - Delivery address */}
-          <div>
-            <h2 className="text-xl font-bold">Shipping Address</h2>
+        <div id="payment-container" className="mt-8">
+          <div className="flex flex-row items-center justify-between mb-6">
+            <h2 className="text-xl font-bold">Delivery</h2>
           </div>
-          <form action="" className="mt-8">
-            <div className="pb-8">
-              <div className="grid grid-cols-2 gap-8">
-                <div className="flex flex-col w-full">
-                  <div className="flex relative z-0 w-full txt-compact-medium">
-                    <Input
-                      onChange={() => console.log("!")}
-                      placeholder="First name"
-                      required
-                      title="Enter your first name"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col w-full">
-                  <div className="flex relative z-0 w-full txt-compact-medium">
-                    <Input
-                      onChange={() => console.log("!")}
-                      placeholder="Last name"
-                      required
-                      title="Enter your last name"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col w-full">
-                  <div className="flex relative z-0 w-full txt-compact-medium">
-                    <Input
-                      onChange={() => console.log("!")}
-                      placeholder="Address"
-                      required
-                      title="Enter your address"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col w-full">
-                  <div className="flex relative z-0 w-full txt-compact-medium">
-                    <Input
-                      onChange={() => console.log("!")}
-                      placeholder="City"
-                      required
-                      title="Enter your city"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col w-full">
-                  <div className="flex relative z-0 w-full txt-compact-medium">
-                    <Input
-                      onChange={() => console.log("!")}
-                      placeholder="State"
-                      required
-                      title="Enter your state"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col w-full">
-                  <div className="flex relative z-0 w-full txt-compact-medium">
-                    <Input
-                      onChange={() => console.log("!")}
-                      placeholder="Phone"
-                      required
-                      title="Enter your phone"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-          {/* Molecula - Delivery address */}
+          <div className="pb-8">
+            <DeliveryCard
+              title="FakeOcasa standar"
+              price={800}
+              onClick={handleDelivery}
+            />
+            <DeliveryCard
+              title="FakeCA plus"
+              price={1800}
+              onClick={handleDelivery}
+            />
+          </div>
         </div>
-        <div id="payment-container"></div>
-        <div id="review-container"></div>
+        <div id="payment-container" className="mt-8">
+        <div className="flex flex-row items-center justify-between mb-6">
+            <h2 className="text-xl font-bold">Delivery</h2>
+          </div>
+          <div className="pb-8">
+            <PaymentCard
+              title="Visa fake"
+              onClick={handlePayment}
+            />
+            <PaymentCard
+              title="Bco Fake"
+              onClick={handlePayment}
+            />
+          </div>
+        </div>
       </div>
       <div id="cart-container" className="sticky flex flex-col gap-x-40 top-0">
         <div className="w-full flex flex-col bg-gray-bg p-8 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
