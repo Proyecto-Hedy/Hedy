@@ -5,7 +5,6 @@ import { useDataContext } from '@/context/data.context';
 import Link from 'next/link';
 import Button from "@/components/atoms/Button";
 import Line from "@/components/atoms/Line";
-import { toast } from "react-toastify";
 import Image from "next/image";
 
 const SHIPPING_COST = 0; 
@@ -34,14 +33,11 @@ const CartPage: React.FC = () => {
     });
   };
 
-  const handleCheckout = () => {
-    toast.success("Checkout successfully");
-  };
 return (
-  <div className="container mx-auto py-8">
+  <div className="container mx-auto h-screen py-8">
       <h2 className="text-2xl font-semibold mb-4">Cart</h2>
       {cart.length === 0 ? (
-        <p>You don't have anything in your cart.</p>
+        <p>{`You don't have anything in your cart`}.</p>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 p-2 ps-4 pe-4 m-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md">
@@ -96,7 +92,7 @@ return (
               <p className="text-lg">Total <span className="float-right">${calculateTotal()}</span></p>
               <Line />
               <Link href="checkout">
-                <Button name="Go to Checkout" onClick={handleCheckout} />
+                <Button name="Go to Checkout" />
               </Link>
             </div>
           </div>
