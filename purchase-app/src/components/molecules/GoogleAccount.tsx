@@ -8,7 +8,7 @@ interface IGoogleAccountProps {
 
 const GoogleAccount = ({ user }: IGoogleAccountProps) => {
   return ( 
-    <div id="google-account" className="text-xs flex items-center justify-center m-4 p-2 rounded-lg bg-gray-bg gap-2 border shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+    <div id="google-account" className="text-xs flex items-center justify-center p-2 rounded-lg bg-gray-bg gap-2 border shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
       <div>
         {user?.photoURL ? (
           <Image

@@ -52,9 +52,9 @@ const Navbar = () => {
           />
         </Link>
         <TextInput onChange={handleChangeInput} />
-        <div className="flex items-center">
+        <div className="flex items-center gap-4">
           <div
-            className='relative'
+            className='relative  m-4'
             onMouseOver={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
           >
@@ -68,22 +68,27 @@ const Navbar = () => {
                 </Link>)
             }
             {isHover && (
-              <div className='z-50 absolute top-[85%] border rounded-lg border-gray-bg-light left-[5%] flex flex-col justify-center bg-gray-bg text-sm'>
+              <div className='overflow-hidden z-50 w-full absolute top-[102%] border rounded-lg border-gray-bg-light flex flex-col justify-center bg-gray-bg text-sm'>
                 {!user ? (
                   <Link className='p-2 hover:bg-gray-bg-light hover:text-white rounded-lg' href="/pages/account">
                     Sign in
                   </Link>
                 )
                 : (
-                  <><Link className='p-2 hover:bg-gray-bg-light hover:text-white rounded-lg' href="/pages/profile">
-                    Orders
+                  <>
+                    <Link 
+                      className='p-2 hover:bg-gray-bg-light hover:text-white text-center'
+                      href="/pages/profile"
+                    >
+                      Orders
                     </Link>
                     <button
-                      className='p-2 hover:bg-gray-bg-light hover:text-white rounded-lg'
+                      className='p-2 hover:bg-gray-bg-light hover:text-white'
                       onClick={handleLogOut}
                     >
                       Sign out
-                    </button></>
+                    </button>
+                  </>
                 )
                 }
               </div>)
