@@ -75,12 +75,15 @@ const Navbar = () => {
                   </Link>
                 )
                 : (
-                  <button 
-                    className='p-2 hover:bg-gray-bg-light hover:text-white rounded-lg'
-                    onClick={handleLogOut}
-                  >
-                    Sign out
-                  </button>
+                  <><Link className='p-2 hover:bg-gray-bg-light hover:text-white rounded-lg' href="/pages/profile">
+                    Orders
+                    </Link>
+                    <button
+                      className='p-2 hover:bg-gray-bg-light hover:text-white rounded-lg'
+                      onClick={handleLogOut}
+                    >
+                      Sign out
+                    </button></>
                 )
                 }
               </div>)

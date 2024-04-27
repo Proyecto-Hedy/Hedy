@@ -1,8 +1,8 @@
 import React from "react";
+
 import Image from "next/image"; 
 import ImageGallery from "@/modules/products/components/image-gallery/page";
 import ProductTabs from "@/modules/products/components/product-tabs/page";
-import RelatedProducts from "@/modules/products/components/related-product/page";
 import { IProductData } from "@/interfaces/data.interfaces";
 import Button from "@/components/atoms/Button";
 import { useDataContext } from "@/context/data.context";
@@ -14,8 +14,8 @@ interface ProductDetailProps {
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
-  const { thumbnail, images } = product; // Obtener la imagen de portada
-  const otherImages = images.filter((image) => image !== thumbnail); // Filtrar las demás imágenes
+  const { thumbnail, images } = product; 
+  const otherImages = images.filter((image) => image !== thumbnail); 
   const { cart, addToCart, user } = useDataContext();
 
   const checkUser = () => {
@@ -70,9 +70,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
       <div className="image-gallery">
         <ImageGallery images={otherImages} />
       </div>
-      {/* <div className="related-products">
-        <RelatedProducts product={product} />
-      </div> */}
     </div>
   );
 };

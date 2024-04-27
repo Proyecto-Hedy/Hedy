@@ -23,9 +23,9 @@ export const useApi = <T,>(path?: string) => {
     } catch (err) {
       if (err instanceof Error) {
         const error = {
-          name: err.name, // the type of error
-          message: err.message, // the description of the error
-          stack: err.stack // the stack trace of the error
+          name: err.name, 
+          message: err.message, 
+          stack: err.stack 
         }
         setError(error)
       } 
