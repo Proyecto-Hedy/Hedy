@@ -15,7 +15,7 @@ import useApi from '@/hooks/useApi';
 import { IDataResponse } from '@/interfaces/data.interfaces';
 
 const Navbar = () => {
-  const { user, setFilteredProducts } = useDataContext()
+  const { user, setFilteredProducts, cart } = useDataContext()
   const { fetchData, data } = useApi<IDataResponse>()
 
   const [isHover, setIsHover] = useState<boolean>(false)
@@ -95,8 +95,9 @@ const Navbar = () => {
             }
           </div>
           <Link href="/pages/cart" passHref>
-            <button className="p-3 border rounded-lg shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shopping-cart hover:translate-y-px hover:translate-x-px"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+            <button className="flex items-center gap-2 p-3 border rounded-lg shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shopping-cart hover:translate-y-px hover:translate-x-px"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+              ({cart.length})
             </button>
           </Link>
         </div>
