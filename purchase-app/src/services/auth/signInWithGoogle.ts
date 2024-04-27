@@ -1,12 +1,12 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import firebase_app from "../firebase";
-
-import ErrorHandler from "@/helper/errorHandler.helper";
+import firebase from "../firebase";
 
 import { AuthResponse } from "@/interfaces/data.interfaces";
 import { RESPONSE_STATUS } from "@/interfaces/enums";
 
-const auth = getAuth(firebase_app);
+import ErrorHandler from "@/helper/errorHandler.helper";
+
+const auth = getAuth(firebase.app);
 const provider = new GoogleAuthProvider();
 
 const signInWithGoogle = async (): Promise<AuthResponse> => {
