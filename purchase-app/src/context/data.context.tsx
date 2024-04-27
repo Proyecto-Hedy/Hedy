@@ -2,7 +2,7 @@
 import { Dispatch, SetStateAction, createContext, useContext, useEffect, useState } from "react";
 
 import { User, getAuth, onAuthStateChanged } from "firebase/auth";
-import firebase_app from "@/services/firebase";
+import firebase from "@/services/firebase";
 import { IProductData } from "@/interfaces/data.interfaces";
 
 /**
@@ -25,7 +25,7 @@ interface IDataProvideProps {
   children: JSX.Element[] | JSX.Element | React.ReactNode;
 }
 
-const auth = getAuth(firebase_app)
+const auth = getAuth(firebase.app)
 
 // Creamos el Context con un obj predefinido
 const DataContext = createContext<IDataContext>({
