@@ -28,3 +28,21 @@ export interface AuthResponse {
   status: number;
   message?: string;
 }
+
+export interface FormInputProps {
+  id?: number
+  onChange: (e: any) => void
+  placeholder: string
+  required: boolean
+  title: string
+  inputState?: string
+}
+
+export interface UserAddress {
+  address: string
+  city: string
+  first_name: string
+  last_name: string
+  Phone: string
+  State: string
+}
