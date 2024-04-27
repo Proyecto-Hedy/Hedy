@@ -1,5 +1,6 @@
 import { collection, addDoc } from "firebase/firestore"; 
 import firebase from "../firebase";
+
 import { AuthResponse, IProductData } from "@/interfaces/data.interfaces";
 import { RESPONSE_STATUS } from "@/interfaces/enums";
 
