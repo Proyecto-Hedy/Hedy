@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useDataContext } from "@/context/data.context";
 import { IProductData } from "@/interfaces/data.interfaces";
 import Line from "@/components/atoms/Line";
 import Image from "next/image";
@@ -10,7 +9,6 @@ import logOut from "@/services/auth/signOut";
 import { navigate } from "@/services/actions";
 
 const Profile: React.FC = () => {
-  const { user } = useDataContext();
   const [products, setProducts] = useState<IProductData[]>([]);
 
   useEffect(() => {
@@ -50,8 +48,8 @@ const Profile: React.FC = () => {
           </div>
         </div>
         <div className="border-l border-gray-300 h-full gap-3" />
-        <div className={`flex flex-col w-${user ? "full" : "full"}`}>
-          <div className="bg-white p-8 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] mb-8"  style={{ width: user ? "800px" : "100%" }}>
+        <div className="flex flex-col w-full">
+          <div className="bg-white p-8 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] mb-8"  style={{ width: "800px" }}>
             <h1 className="text-4xl font-semibold mb-8">Orders</h1>
             <div className="text-xl mb-8">
               <p>Your recent purchases:</p>
