@@ -18,6 +18,7 @@ const ProductOrder = ({ title, image, brand, price, quantity }: IProductOrderPro
             alt={title}
             layout="fill"
             objectFit="cover"
+            sizes="fill"
           />
         </div>
         <div className="w-full">
