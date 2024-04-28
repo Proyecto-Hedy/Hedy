@@ -8,7 +8,10 @@ const db = firebase.database
 
 const addData = async (body: IProductData[], email: string): Promise<AuthResponse> => {
   try {
-    await Promise.all(body.map((product: IProductData) => addDoc(collection(db, "order"), body)))
+    await Promise.all(body.map((product: IProductData) => addDoc(collection(db, "order"), {
+      ...product,
+      email
+    })))
     return { status: RESPONSE_STATUS.CREATED, message: "Record successfully inserted in the database" }
   } catch (error: any) {
     return { message: error.message , status: RESPONSE_STATUS.BAD_REQUEST }
