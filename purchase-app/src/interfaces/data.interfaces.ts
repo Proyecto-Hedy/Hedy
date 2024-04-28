@@ -43,6 +43,21 @@ export interface UserAddress {
   city: string
   first_name: string
   last_name: string
-  Phone: string
-  State: string
+  phone: string
+  state: string
+  shipping: IShipping
+}
+
+export interface IOrderPlaced {
+  shippingAddress: UserAddress
+  products: IProductData[]
+  payment: string
+  subtotal: number
+  total: number
+  orderData: string
+}
+
+export interface IShipping {
+  price: number
+  name: string
 }
