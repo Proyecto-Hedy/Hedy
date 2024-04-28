@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Button from "@/components/atoms/Button";
 import Line from "@/components/atoms/Line";
 import Image from "next/image";
+import isAuth from '@/hoc/isAuth';
 
 const SHIPPING_COST = 0; 
 
@@ -106,4 +107,4 @@ return (
 
 };
 
-export default CartPage;
+export default isAuth(CartPage);

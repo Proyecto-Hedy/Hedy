@@ -10,6 +10,7 @@ import logOut from "@/services/auth/signOut";
 import { navigate } from "@/services/actions";
 
 import Orders from "./Orders";
+import isAuth from "@/hoc/isAuth";
 
 const Profile: React.FC = () => {
   const { user } = useDataContext()
@@ -54,4 +55,4 @@ const Profile: React.FC = () => {
   );
 };
 
-export default Profile;
+export default isAuth(Profile);

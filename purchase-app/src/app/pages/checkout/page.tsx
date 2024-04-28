@@ -19,6 +19,7 @@ import { navigate } from "@/services/actions";
 import addData from "@/services/firestore/addData";
 
 import { RESPONSE_STATUS } from "@/interfaces/enums";
+import isAuth from "@/hoc/isAuth";
 
 const Checkout = () => {
   const { user, cart, clearCart, setOrderPlaced } = useDataContext()
@@ -248,4 +249,4 @@ const Checkout = () => {
   );
 }
 
-export default Checkout;
+export default isAuth(Checkout);
