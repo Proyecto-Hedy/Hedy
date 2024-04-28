@@ -67,11 +67,17 @@ return (
                       onChange={(event) => handleQuantityChange(event, item.id)}
                       className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     >
-                      {[...Array.from(Array(item.stock).keys())].map((num) => (
+                      {item.stock ? [...Array.from(Array(item.stock).keys())].map((num) => (
                         <option key={num + 1} value={num + 1}>
                           {num + 1}
                         </option>
-                      ))}
+                      ))
+                      : (
+                        <option key={9999}>
+                          No hay stock
+                        </option>
+                        )
+                      }
                     </select>
                   </div>
                 </div>
