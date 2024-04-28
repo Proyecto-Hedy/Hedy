@@ -16,23 +16,24 @@ import { useDataContext } from "@/context/data.context";
 import { FormInputProps, IProductData, UserAddress } from "@/interfaces/data.interfaces";
 
 import { navigate } from "@/services/actions";
+import addData from "@/services/firestore/addData";
+
+import { RESPONSE_STATUS } from "@/interfaces/enums";
 
 const Checkout = () => {
-  const { cart, clearCart } = useDataContext()
+  const { user, cart, clearCart, setOrderPlaced } = useDataContext()
 
-  const [subtotal, setSubtotal] = useState<number>(0)
+  const [shippingAddress, setShippingAddress] = useState<UserAddress>()
   const [shipping, setShipping] = useState<number>(0)
   const [payment, setPayment] = useState<string>("")
+  const [subtotal, setSubtotal] = useState<number>(0)
   const [total, setTotal] = useState<number>(0)
-  const [shippingAddress, setShippingAddress] = useState<UserAddress>()
 
   const handleShippingAddres = (e: React.ChangeEvent<HTMLInputElement>) => {
     setShippingAddress(prev => {
-      if (prev){
-        return {
-          ...prev,
-          [(e.target.name).split(" ").join("_").toLocaleLowerCase()]: e.target.value 
-        }
+      return {
+        ...prev!,
+        [(e.target.name).split(" ").join("_").toLocaleLowerCase()]: e.target.value 
       }
     })
   }
@@ -82,14 +83,39 @@ const Checkout = () => {
     }
   ]
 
-  const handleCheckout = () => {
-    toast.success("Checkout successfully")
-    clearCart();
-    navigate("/")
+  const handleCheckout = async () => {
+    const insertRecords = await addData(cart, user?.email!)
+
+    if (insertRecords.status === RESPONSE_STATUS.BAD_REQUEST) {
+      toast.error("An unexpected error occurred")
+    }
+    else {
+      toast.success("Order successfully processed")
+      setOrderPlaced({
+        shippingAddress: shippingAddress!,
+        products: cart,
+        payment,
+        subtotal,
+        total,
+        orderData: new Date().toLocaleString()
+      })
+      clearCart();
+      navigate("/pages/success")
+    }
   }
 
-  const handleDelivery = (price: number) => {
+  const handleDelivery = (price: number, title: string) => {
+    const name = title.split(" ").join("_").toLocaleLowerCase()
     setShipping(prev => prev === price ? 0 : price)
+    setShippingAddress(prev => {
+      return {
+        ...prev!,
+        shipping: {
+          name,
+          price
+        }
+      }
+    })
   }
 
   const handlePayment = (payment: string) => {
@@ -112,7 +138,7 @@ const Checkout = () => {
     <div id="checkout-container" 
       className="grid grid-cols-[1fr_600px] p-8 m-16 mt-8 gap-12 relative">
       <div>
-        <div id="shipping-container" className="p-8 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+        <div id="shipping-container" className="bg-gray-bg p-8 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
           {/* Molecula - Shipping address */}
           <div>
             <h2 className="text-xl font-bold">Shipping Address</h2>
@@ -135,7 +161,7 @@ const Checkout = () => {
           </form>
           {/* Molecula - Shipping address */}
         </div>
-        <div id="payment-container" className="mt-8">
+        <div id="payment-container" className="mt-8 bg-gray-bg p-8 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
           <div className="flex flex-row items-center justify-between mb-6">
             <h2 className="text-xl font-bold">Delivery</h2>
           </div>
@@ -152,9 +178,9 @@ const Checkout = () => {
             />
           </div>
         </div>
-        <div id="payment-container" className="mt-8">
+        <div id="payment-container" className="mt-8 bg-gray-bg p-8 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
         <div className="flex flex-row items-center justify-between mb-6">
-            <h2 className="text-xl font-bold">Delivery</h2>
+            <h2 className="text-xl font-bold">Payment</h2>
           </div>
           <div className="pb-8">
             <PaymentCard
@@ -177,8 +203,8 @@ const Checkout = () => {
               {
                 cart?.length ? cart.map((product: IProductData) => {
                   return (
-                    <>
-                    <div key={product.id} className="w-full gap-2 flex items-center pb-4">
+                    <div key={product.id}>
+                    <div className="w-full gap-2 flex items-center pb-4">
                       <div className="w-[33%]">
                         <Image
                           src={product.thumbnail}
@@ -196,7 +222,7 @@ const Checkout = () => {
                       </div>
                     </div>
                     <Line />
-                    </>
+                    </div>
                   )
                 })
                 : <LoadingSpinner />
@@ -215,7 +241,7 @@ const Checkout = () => {
           </div>
         </div>
         <div>
-          <Button name="Checkout" onClick={handleCheckout} />
+          <Button name="Place order" onClick={handleCheckout} />
         </div>
       </div>
     </div>
