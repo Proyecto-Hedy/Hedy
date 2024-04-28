@@ -12,6 +12,7 @@ const SHIPPING_COST = 0;
 
 const CartPage: React.FC = () => {
   const { cart, addToCart } = useDataContext();
+  console.log("🚀 ~ cart:", cart)
 
   const calculateSubtotal = () => {
     return cart.reduce((subtotal, item) => subtotal + item.total, 0);
@@ -24,14 +25,14 @@ const CartPage: React.FC = () => {
   const handleQuantityChange = (event: React.ChangeEvent<HTMLSelectElement>, itemId: number) => {
     const selectedQuantity = parseInt(event.target.value, 10);
 
-    const updatedCart = cart.map((item) => {
+    for (const item of cart) {
       if (item.id === itemId) {
         const newTotal = item.price * selectedQuantity;
-        addToCart(item);
-        return { ...item, quantity: selectedQuantity, total: newTotal };
+        const newItem = { ...item, quantity: selectedQuantity, total: newTotal };
+        addToCart(newItem);
       }
       return item;
-    });
+    }
   };
 
 return (
@@ -66,7 +67,7 @@ return (
                       onChange={(event) => handleQuantityChange(event, item.id)}
                       className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     >
-                      {[...Array.from(Array(10).keys())].map((num) => (
+                      {[...Array.from(Array(item.stock).keys())].map((num) => (
                         <option key={num + 1} value={num + 1}>
                           {num + 1}
                         </option>

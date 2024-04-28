@@ -15,6 +15,7 @@ interface IDataContext {
   user: User | null;
   setUser: Dispatch<SetStateAction<User | null>>;
   cart: any[];
+  setCart: Dispatch<SetStateAction<any | null>>;
   addToCart: (product: any) => void;
   clearCart: () => void;
   filteredProducts: IProductData[];
@@ -34,6 +35,7 @@ const DataContext = createContext<IDataContext>({
   user: null,
   setUser: () => {},
   cart: [],
+  setCart: () => {},
   addToCart: () => {},
   clearCart: () => {},
   filteredProducts: [],
@@ -70,9 +72,7 @@ export const DataProvider = ({ children }: IDataProvideProps) => {
     if (isProductInCart) {
       const updatedCart = cart.map((item) => {
         if (item.id === product.id) {
-          const newQuantity = item.quantity + 1;
-          const newTotal = item.price * newQuantity;
-          return { ...item, quantity: newQuantity, total: newTotal };
+          return product
         }
         return item;
       });
@@ -92,6 +92,7 @@ export const DataProvider = ({ children }: IDataProvideProps) => {
       user,
       setUser,
       cart,
+      setCart,
       addToCart,
       clearCart,
       filteredProducts,
