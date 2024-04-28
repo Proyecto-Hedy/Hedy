@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, createContext, useContext, useEffect, useStat
 
 import { User, getAuth, onAuthStateChanged } from "firebase/auth";
 import firebase from "@/services/firebase";
-import { IProductData } from "@/interfaces/data.interfaces";
+import { IOrderPlaced, IProductData } from "@/interfaces/data.interfaces";
 
 /**
  * Para utilizar Context, hay 3 elementos importantes que debemos tener en cuenta:
@@ -19,6 +19,8 @@ interface IDataContext {
   clearCart: () => void;
   filteredProducts: IProductData[];
   setFilteredProducts: Dispatch<SetStateAction<IProductData[] | []>>;
+  orderPlaced: IOrderPlaced | null
+  setOrderPlaced: Dispatch<SetStateAction<IOrderPlaced | null>>;
 }
 
 interface IDataProvideProps {
@@ -36,13 +38,16 @@ const DataContext = createContext<IDataContext>({
   clearCart: () => {},
   filteredProducts: [],
   setFilteredProducts: () => {},
+  orderPlaced: null,
+  setOrderPlaced: () => {},
 });
 
 // Creamos el Provider que envolvera nuestra app y/o componentes
 export const DataProvider = ({ children }: IDataProvideProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [filteredProducts, setFilteredProducts] = useState<IProductData[]>([]);
-  const [cart, setCart] = useState<any[]>([]); 
+  const [cart, setCart] = useState<any[]>([]);
+  const [orderPlaced, setOrderPlaced] = useState<IOrderPlaced | null>(null);
 
   useEffect(() => {
     // Observador
@@ -84,7 +89,15 @@ export const DataProvider = ({ children }: IDataProvideProps) => {
 
   return (
     <DataContext.Provider value={{ 
-      user, setUser, cart, addToCart, clearCart, filteredProducts, setFilteredProducts
+      user,
+      setUser,
+      cart,
+      addToCart,
+      clearCart,
+      filteredProducts,
+      setFilteredProducts,
+      orderPlaced,
+      setOrderPlaced
     }}>
       {children}
     </DataContext.Provider>
