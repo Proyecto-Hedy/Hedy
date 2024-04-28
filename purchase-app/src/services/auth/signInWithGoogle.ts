@@ -1,4 +1,4 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, User } from "firebase/auth";
 import firebase from "../firebase";
 
 import { AuthResponse } from "@/interfaces/data.interfaces";
@@ -9,7 +9,7 @@ import ErrorHandler from "@/helper/errorHandler.helper";
 const auth = getAuth(firebase.app);
 const provider = new GoogleAuthProvider();
 
-const signInWithGoogle = async (): Promise<AuthResponse> => {
+const signInWithGoogle = async (): Promise<AuthResponse<User>> => {
   try {
     const { user } = await signInWithPopup(auth, provider)
     return { response: user, status: RESPONSE_STATUS.CREATED, message: "Sign in successfully" }

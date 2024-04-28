@@ -1,5 +1,5 @@
 import firebase from "../firebase";
-import { getAuth, signOut } from "firebase/auth";
+import { User, getAuth, signOut } from "firebase/auth";
 
 import { AuthResponse } from "@/interfaces/data.interfaces";
 import { RESPONSE_STATUS } from "@/interfaces/enums";
@@ -8,7 +8,7 @@ import ErrorHandler from "@/helper/errorHandler.helper";
 
 const auth = getAuth(firebase.app);
 
-const logOut = async (): Promise<AuthResponse> => {
+const logOut = async (): Promise<AuthResponse<User>> => {
     try {
       await signOut(auth)
       return { status: RESPONSE_STATUS.OK, message: "Sign out successfully" }
