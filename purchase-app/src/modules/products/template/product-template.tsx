@@ -11,7 +11,7 @@ interface ProductsTemplateProps {
 const ProductsTemplate: React.FC<ProductsTemplateProps> = ({ products }) => {
     return (
         <div className={styles.productContainer}>
-            {products.map((product) => (
+            {products?.length && products.map((product) => (
                 <Link href={`pages/product/${product.id}`} key={product.id}>
                     <div>
                         <ProductPreview product={product} />

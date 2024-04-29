@@ -43,7 +43,7 @@ const Navbar = () => {
   return (
     <nav id='navbar' className="w-full bg-white text-black shadow-md">
       <div id='navbar-container' className="mx-auto px-6 flex justify-between items-center">
-        <Link href="/">
+        <Link href="/" onClick={() => setFilteredProducts([])}>
           <Image 
             src='/logo.png'
             width={125}

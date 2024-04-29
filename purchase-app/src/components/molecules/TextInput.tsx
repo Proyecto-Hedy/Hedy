@@ -33,6 +33,7 @@ const TextInput = ({ onChange }: ITextInputProps) => {
         type="text"
         placeholder="Search product"
         name="text input"
+        value={inputState}
         required
       />
       <button
