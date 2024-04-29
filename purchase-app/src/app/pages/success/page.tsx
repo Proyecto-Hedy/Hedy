@@ -10,7 +10,7 @@ const Success = () => {
 
   return (
     <div className="p-8 m-16 mt-8 min-h-[calc(100vh-64px)]">
-      <div className="content-container flex flex-col justify-center items-center gap-y-10 max-w-4xl h-full w-full">
+      <div className="content-container m-auto flex flex-col justify-center items-center gap-y-10 max-w-4xl h-full w-full">
         <div className="flex flex-col gap-4 max-w-4xl h-full w-full py-10" data-testid="order-complete-container">
           <div className="flex flex-col bg-gray-bg p-8 bg-gray-bg shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
             <span className="text-xl font-bold">Thank you!</span>
