@@ -12,7 +12,6 @@ const SHIPPING_COST = 0;
 
 const CartPage: React.FC = () => {
   const { cart, addToCart } = useDataContext();
-  console.log("🚀 ~ cart:", cart)
 
   const calculateSubtotal = () => {
     return cart.reduce((subtotal, item) => subtotal + item.total, 0);

@@ -10,7 +10,6 @@ import { useDataContext } from "@/context/data.context";
 
 const Home = () => {
   const { filteredProducts } = useDataContext()
-  console.log("🚀 ~ Home ~ filteredProducts:", filteredProducts)
   const limit = 18;
   const [skip, setSkip] = useState(0);
   const { data, isLoading, error } = useApi<IDataResponse>(
